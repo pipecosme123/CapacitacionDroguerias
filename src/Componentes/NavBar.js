@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { RoutersLinks } from '../Constantes/RoutersLinks';
-import Perfil from './Perfil';
+// import Perfil from './Perfil';
 import '../css/NavBar.css';
 import { Imagenes } from '../Constantes/Imagenes';
 
@@ -17,7 +17,7 @@ const NavBar = () => {
                <Link to={`${RoutersLinks.Capacitacion}`}>Capacítate</Link>
                <Link to={`${RoutersLinks.Material}`}>Material de estudio</Link>
                <Link to={`${RoutersLinks.Descubre}`}>Descubre más</Link>
-               <Perfil />
+               {/* <Perfil /> */}
             </div>
          </div>
       </div>

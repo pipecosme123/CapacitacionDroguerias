@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { MdFileDownload } from 'react-icons/md';
+import { MdFileDownload 
+   // ,MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos 
+} from 'react-icons/md';
 import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri';
 import { Imagenes } from '../Constantes/Imagenes';
 import { Capacitaciones } from '../Constantes/Capacitaciones';
@@ -15,11 +17,20 @@ const Capacitacion = () => {
    const [video, setVideo] = useState(0);
 
    let contentCap = Capacitaciones[video];
-
+   // let contentPrev = Capacitaciones[video - 1].titulo;
+   // let contentNext = Capacitaciones[video + 1].titulo;
+// 
    const hadleCapacitacion = () => {
-      setVideo(video + 1);
-      setShowQuiz(false);
-      setMasTexto(false)
+      console.log(video);
+      if(video < 4){
+         setVideo(video + 1);
+         setShowQuiz(false);
+         setMasTexto(false)
+      }else{
+         setVideo(0);
+         setShowQuiz(false);
+         setMasTexto(false)
+      }
    }
 
    return (
@@ -43,6 +54,16 @@ const Capacitacion = () => {
                   />
                </div>
             </div>
+            {/* <div className="botonesVideos">
+               <div className="botonPrev">
+                  <MdOutlineArrowBackIosNew />
+                  <h3>{contentPrev}</h3>
+               </div>
+               <div className="botonNext">
+                  <MdOutlineArrowForwardIos />
+                  <h3>{contentNext}</h3>
+               </div>
+            </div> */}
          </div>
 
          <div className="informacion Content">

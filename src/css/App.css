@@ -33,3 +33,9 @@ body {
 .noShow {
    display: none;
 }
+
+@media only screen and (max-width: 1400px) {
+   .Content{
+      padding: 0 9em;
+   }
+}

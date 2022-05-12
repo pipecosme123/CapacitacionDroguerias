@@ -1,0 +1,31 @@
+.informacionPrincipal .informaciones{
+   display: flex;
+   justify-content: space-between;
+}
+
+.informacionPrincipal .informaciones .informacion{
+   width: 30%;
+   padding: 2em 1em;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   background: var(--color-gris);
+   border-radius: 1em;
+}
+
+.informaciones .informacion img{
+   width: 50%;
+}
+
+.informaciones .informacion h3{
+   margin-bottom: 0;
+   font-size: 2em;
+   color: var(--color-colgate);
+}
+
+.informaciones .informacion p{
+   padding: 0 2em;
+   text-align: justify;
+   font-family: "Light";
+   font-size: 1.2em;
+}

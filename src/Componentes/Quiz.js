@@ -56,14 +56,15 @@ const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
       hadleCapacitacion();
    }
 
-   // useEffect(() => {
+   useEffect(() => {
+      window.scroll(0, 0); 
    //    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
    //    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
 
    //    window.onscroll = function () {
    //       window.scrollTo(scrollLeft, scrollTop);
    //    };
-   // }, []);
+   }, []);
 
    return (
       <>
@@ -92,14 +93,17 @@ const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
                   </button>
                </>
                :
-               <>
+               <div className='resultadoFinal'>
                   <h1 className="texto">Tu Resultado</h1>
-                  <h1 className="respuestasCorrectas">{`${score}/${countPreguntas}`}</h1>
-                  <hr />
-                  <button className={`siguientePregunta`} onClick={() => changeVideo()}>
-                     Continuar <HiChevronDoubleRight />
-                  </button>
-               </>
+                  <h3 className="respuestasCorrectas">{`${score}/${countPreguntas}`}</h3>
+                  <p></p>
+                  <div className="footer2">
+                     <hr />
+                     <button className={`siguientePregunta`} onClick={() => changeVideo()}>
+                        Continuar <HiChevronDoubleRight />
+                     </button>
+                  </div>
+               </div>
             }
          </div>
       </>

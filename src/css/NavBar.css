@@ -44,6 +44,21 @@
    color: #d2010d;
 }
 
-/* .NavBar .container .nav-navegacion a:hover {
+@media only screen and (max-width: 1400px) {
 
-} */
+   .NavBar {
+      height: 4em;
+   }
+
+   .NavBar .container .nav-imgLogo {
+      height: 4em;
+   }
+
+   .NavBar .container .nav-navegacion {
+      width: 60%;
+   }
+
+   .NavBar .container .nav-navegacion a {
+      font-size: 1em;
+   }
+}
