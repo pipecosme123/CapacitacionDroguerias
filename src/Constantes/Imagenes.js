@@ -3,6 +3,7 @@ import iconoPdf from "../Imagenes/iconoPdf.png";
 import videos from "../Imagenes/videos.png";
 import descarga from "../Imagenes/descarga.png";
 import encuesta from "../Imagenes/encuesta.png";
+import imgPortada from "../Imagenes/imgportada.png";
 
 import slider1 from "../Imagenes/slider1.jpg";
 import slider2 from "../Imagenes/slider2.jpg";
@@ -18,6 +19,7 @@ export const Imagenes = {
    videos: videos,
    descarga: descarga,
    encuesta: encuesta,
+   imgPortada: imgPortada
 }
 
 export const slider = [

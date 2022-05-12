@@ -1,3 +1,25 @@
+.sliders{
+   margin-bottom: 3em;
+   padding: 1em 0;
+   background-color: var(--color-gris);
+}
+
+.sliders img{
+   width: 90%;
+}
+
+.swiper-slide {
+   display: flex;
+   justify-content: center;
+}
+
+.informacionPrincipal .titulo{
+   font-family: "BoldItalic";
+   font-size: 3em;
+   color: var(--color-colgate);
+   text-align: center;
+}
+
 .informacionPrincipal .informaciones{
    display: flex;
    justify-content: space-between;
@@ -20,6 +42,7 @@
 .informaciones .informacion h3{
    margin-bottom: 0;
    font-size: 2em;
+   text-align: center;
    color: var(--color-colgate);
 }
 
@@ -28,4 +51,27 @@
    text-align: justify;
    font-family: "Light";
    font-size: 1.2em;
+}
+
+@media only screen and (max-width: 1400px) {
+   .sliders img{
+      width: 80%;
+   }
+
+   .informacionPrincipal .informaciones{
+      padding: 0 7em;
+   }   
+
+   .informacionPrincipal .informaciones .informacion{
+      width: 26%;
+   }
+   
+   .informaciones .informacion h3{
+      font-size: 1.4em;
+   }
+   
+   .informaciones .informacion p{
+      padding: 0 1em;
+      font-size: 1em;
+   }
 }

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Imagenes, slider } from '../Constantes/Imagenes';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+import { Imagenes } from '../Constantes/Imagenes';
+import SliderImg from '../Componentes/SliderImg';
 import '../css/Home.css';
 
 const Home = () => {
@@ -9,22 +8,12 @@ const Home = () => {
       <div className='Home'>
          <div className="sliders">
             <div className="Content">
-               <Swiper
-                  spaceBetween={50}
-                  slidesPerView={1}
-                  onSlideChange={() => console.log('slide change')}
-                  onSwiper={(swiper) => console.log(swiper)}
-               >
-                  {slider.map((img, index) => (
-                     <SwiperSlide key={index}>
-                        <img src={img.imgSlider} alt="" />
-                     </SwiperSlide>
-                  ))}
-               </Swiper>
+               <SliderImg />
             </div>
          </div>
          <div className="informacionPrincipal">
             <div className="Content">
+               <h1 className='titulo'>Aquí encontraras</h1>
                <div className="informaciones">
                   <div className="informacion">
                      <img src={Imagenes.videos} alt="" />

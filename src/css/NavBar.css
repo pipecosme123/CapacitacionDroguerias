@@ -30,7 +30,7 @@
    align-items: center;
 }
 
-.NavBar .container .nav-navegacion a {
+.NavBar .container .nav-navegacion a.navLink {
    position: relative;
    font-family: "Regular";
    font-size: 1.3em;
@@ -39,13 +39,18 @@
    text-decoration: none;
 }
 
-.NavBar .container .nav-navegacion a:hover {
+.NavBar .container .nav-navegacion a.navLink:hover {
    font-weight: 900;
-   color: #d2010d;
+   color: var(--color-colgate);
+}
+
+.NavBar .container .nav-navegacion a.navLink.activeLink{
+   color: var(--color-colgate);
+   font-weight: 900;
+   border-bottom: 2px solid var(--color-colgate);
 }
 
 @media only screen and (max-width: 1400px) {
-
    .NavBar {
       height: 4em;
    }

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { MdFileDownload 
-   // ,MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos 
-} from 'react-icons/md';
+import { MdFileDownload, MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from 'react-icons/md';
 import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri';
 import { Imagenes } from '../Constantes/Imagenes';
 import { Capacitaciones } from '../Constantes/Capacitaciones';

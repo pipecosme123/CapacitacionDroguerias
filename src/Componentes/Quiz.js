@@ -58,12 +58,6 @@ const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
 
    useEffect(() => {
       window.scroll(0, 0); 
-   //    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-   //    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-
-   //    window.onscroll = function () {
-   //       window.scrollTo(scrollLeft, scrollTop);
-   //    };
    }, []);
 
    return (
