@@ -8,8 +8,8 @@ const Perfil = () => {
    const [show, setShow] = useState(false);
 
    const cookies = new Cookies();
-   // const usuario = `${cookies.get('nombresUsuarios')} ${cookies.get('apellidosUsuarios')}`; 
-   const usuario = `Prueba Prueba`; 
+   const usuario = `${cookies.get('correoUsuario')}`; 
+   // const usuario = `Prueba Prueba`; 
 
    const cerrarSesion = () => {
 
@@ -32,7 +32,7 @@ const Perfil = () => {
          <div className={show ? "contenidoPerfil" : "noShow"}>
             {usuario}
             <hr />
-            <button variant='primary' onClick={() => cerrarSesion()}>Cerrar sesión</button>
+            <button className='primary' onClick={() => cerrarSesion()}>Cerrar sesión</button>
          </div>
       </div>
    );

@@ -31,6 +31,11 @@ const RouterDom = () => {
             <Route exact path={RoutersLinks.Capacitacion} element={<Capacitacion />} />
             <Route exact path={RoutersLinks.Material} element={<Material />} />
          </Routes>
+
+         {pathName !== RoutersLinks.Login &&
+            pathName !== RoutersLinks.Registrarse &&
+            <div className='space'></div>
+         }
       </>
    );
 };

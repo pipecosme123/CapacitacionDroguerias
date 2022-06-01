@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Loading from '../Componentes/Loading';
@@ -6,7 +6,6 @@ import { Imagenes } from '../Constantes/Imagenes';
 import { RoutersLinks } from '../Constantes/RoutersLinks';
 import '../css/Login.css';
 import { useForm } from '../hooks/useForm';
-import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const cookies = new Cookies();
 
@@ -28,8 +27,6 @@ const validationForm = (form) => {
 
 const Login = () => {
 
-   const [storage, setStorage] = useLocalStorage("data", {});
-
    const {
       // form,
       error,
@@ -41,22 +38,20 @@ const Login = () => {
       handleSubmit
    } = useForm(initialForm, validationForm);
 
-   const sesion = () => {
-      setStorage(data[0]);
-      cookies.set("idUsuario", data[0].idUsuarios, { path: '/' });
-      cookies.set("correoUsuario", data[0].correoUsuarios, { path: '/' });
-      window.location.pathname = RoutersLinks.Home;
-   }
-
    useEffect(() => {
       if (responseApi && data !== undefined) {
-         sesion();
+
+         window.localStorage.setItem("data", JSON.stringify(data[0]));
+         cookies.set("idUsuario", data[0].idUsuarios, { path: '/' });
+         cookies.set("correoUsuario", data[0].correoUsuarios, { path: '/' });
+         window.location.pathname = RoutersLinks.Home;
+
       }
 
       if (cookies.get('idUsuario')) {
          window.location.pathname = RoutersLinks.Home;
       }
-      
+
    }, [responseApi, data]);
 
    return (

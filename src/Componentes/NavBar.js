@@ -9,14 +9,15 @@ import Cookies from 'universal-cookie';
 const NavBar = () => {
 
    let pathName = window.location.pathname;
-   const cookies = new Cookies();
+
 
    useEffect(() => {
+      const cookies = new Cookies();
       if (!cookies.get('idUsuario')) {
          window.location.pathname = RoutersLinks.Login;
       }
    }, []);
-   
+
    return (
       <nav className='NavBar'>
          <div className="container">

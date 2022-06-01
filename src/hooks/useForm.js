@@ -1,4 +1,5 @@
 import axios from "axios";
+import fileDownload from "js-file-download";
 import { useState } from "react";
 import { urlApi } from "../Constantes/RoutersLinks";
 
@@ -37,26 +38,26 @@ export const useForm = (initialForm, validationForm) => {
       delete form[''];
       delete error[''];
       // error.estado, 
-      console.log(Object.keys(error).length === 1, error.estado, Object.keys(error).length === 1 && error.estado)
+      // console.log(Object.keys(error).length === 1, error.estado, Object.keys(error).length === 1 && error.estado)
 
       if (Object.keys(error).length === 1 && error.estado) {
 
          setLoading(true);
          axios.post(`${urlApi}/${form.accessAPI}`, form)
             .then(function (response) {
-               console.log(response)
+               // console.log(response)
                setData(response.data);
                setResponseApi(true);
             })
             .catch(function (error) {
                setResponseApi(false);
-               console.log(error);
+               // console.log(error);
             })
             .finally(() => {
                setLoading(false);
             });
       } else {
-         console.log("Hay un elemento de la validacion que tiene un estado 'true'");
+         // console.log("Hay un elemento de la validacion que tiene un estado 'true'");
       }
 
    };
@@ -65,16 +66,28 @@ export const useForm = (initialForm, validationForm) => {
 
       axios.post(`${urlApi}/${datosCapacitacion.url}`, datosCapacitacion)
          .then(function (response) {
-            console.log(response)
+            // console.log(response)
             setData(response.data);
             setResponseApi(true);
          })
          .catch(function (error) {
             setResponseApi(false);
-            console.log(error);
+            // console.log(error);
          })
          .finally(() => {
             setLoading(false);
+         });
+   }
+
+   const descargaMaterial = (nameFile, nameDownload) => {
+
+      axios({
+         method: 'get',
+         url: `${urlApi}/materialDescargable/${nameFile}`,
+         responseType: 'blob'
+      })
+         .then(function (res) {
+            fileDownload(res.data, nameDownload)
          });
    }
 
@@ -88,7 +101,8 @@ export const useForm = (initialForm, validationForm) => {
       handleChange,
       handleBlur,
       handleSubmit,
-      handleShowCapacitacion
+      handleShowCapacitacion,
+      descargaMaterial
    }
 
 }

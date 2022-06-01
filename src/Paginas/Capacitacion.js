@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { MdFileDownload } from 'react-icons/md';
 import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri';
 import { Imagenes } from '../Constantes/Imagenes';
-import { Capacitaciones } from '../Constantes/Capacitaciones';
+import { Capacitaciones, MenuCap } from '../Constantes/Capacitaciones';
 import ReactPlayer from 'react-player';
 import Quiz from '../Componentes/Quiz';
 import '../css/Capacitacion.css';
 import { useParams } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
 import Cookies from 'universal-cookie';
+import { RoutersLinks } from '../Constantes/RoutersLinks';
 
 const cookies = new Cookies();
 
@@ -18,7 +19,8 @@ const Capacitacion = () => {
    const [showQuiz, setShowQuiz] = useState(false);
 
    const {
-      handleShowCapacitacion
+      handleShowCapacitacion,
+      descargaMaterial
    } = useForm();
 
    let { id } = useParams();
@@ -26,17 +28,18 @@ const Capacitacion = () => {
    const [video, setVideo] = useState(parseInt(id));
 
    let contentCap = Capacitaciones[video];
+   let dowloadFile = MenuCap[video]
 
    const handleCapacitacion = () => {
-      console.log(video);
+      // console.log(video);
       if (video < 4) {
          setVideo(video + 1);
          setShowQuiz(false);
          setMasTexto(false)
       } else {
-         setVideo(0);
          setShowQuiz(false);
          setMasTexto(false)
+         window.location.pathname = RoutersLinks.MenuCapacitacion;
       }
    }
 
@@ -59,7 +62,7 @@ const Capacitacion = () => {
          producto = "LuminousWhite";
       }
 
-      console.log(producto, idVideo);
+      // console.log(producto, idVideo);
       return producto;
    }
 
@@ -145,13 +148,15 @@ const Capacitacion = () => {
 
                   <div className="material">
                      <h3>Material de estudio</h3>
-                     <div className="descargaMaterial">
+
+                     <div className="descargaMaterial" onClick={() => descargaMaterial(dowloadFile.descarga, dowloadFile.nombreDescarga)}>
                         <img src={Imagenes.iconoPdf} alt="" />
                         <div className="textoMaterial">
                            <h5>Descargar <MdFileDownload className='iconSvg' /></h5>
                            <p>Infografia {contentCap.titulo}</p>
                         </div>
                      </div>
+
                   </div>
 
                </div>

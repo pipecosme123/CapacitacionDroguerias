@@ -62,8 +62,8 @@
    .NavBar .container .nav-navegacion {
       width: 60%;
    }
-
-   .NavBar .container .nav-navegacion a {
+   
+   .NavBar .container .nav-navegacion a.navLink{
       font-size: 1em;
    }
 }

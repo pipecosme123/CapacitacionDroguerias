@@ -30,6 +30,12 @@
    height: 100%;
 }
 
+@media only screen and (max-width: 1400px){
+   .informacion .material h3 {
+      font-size: 1.5em !important;
+  }
+}
+
 /* -------- DESCRIPCIÓN -------- */
 
 .informacion {
@@ -94,6 +100,11 @@
 
 .informacion .material .descargaMaterial{
    display: flex;
+}
+
+.informacion .material .descargaMaterial:hover{
+   transform: scale(1.02);
+   cursor: pointer;
 }
 
 .descargaMaterial img{

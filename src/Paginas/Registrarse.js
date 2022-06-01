@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { drogerias, Regiones } from '../Constantes/ConstRegistros';
 import { Imagenes } from '../Constantes/Imagenes';
-import { RoutersLinks, urlApi } from '../Constantes/RoutersLinks';
+import { RoutersLinks } from '../Constantes/RoutersLinks';
 import { useForm } from '../hooks/useForm';
 import '../css/Registrarse.css';
 import Loading from '../Componentes/Loading';
