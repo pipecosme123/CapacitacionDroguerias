@@ -25,17 +25,18 @@ const Capacitacion = () => {
 
    let { id } = useParams();
 
-   const [video, setVideo] = useState(parseInt(id));
+   let video = parseInt(id);
 
    let contentCap = Capacitaciones[video];
    let dowloadFile = MenuCap[video]
 
    const handleCapacitacion = () => {
-      // console.log(video);
+      console.log(video);
       if (video < 4) {
-         setVideo(video + 1);
+         // setVideo(video + 1);
          setShowQuiz(false);
-         setMasTexto(false)
+         setMasTexto(false);
+         window.location.pathname = `/Capacitacion/${video + 1}`;
       } else {
          setShowQuiz(false);
          setMasTexto(false)
@@ -62,7 +63,7 @@ const Capacitacion = () => {
          producto = "LuminousWhite";
       }
 
-      // console.log(producto, idVideo);
+      console.log(producto, idVideo);
       return producto;
    }
 

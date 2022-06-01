@@ -14,11 +14,11 @@ const MenuCapacitacion = () => {
    } = useForm();
 
    const [productos, setProductos] = useState({
-      SensitiveProAlivio: "NO",
-      Periogard: "NO",
-      Orthogard: "NO",
-      Total12: "NO",
-      LuminousWhite: "NO"
+      SensitiveProAlivio: "",
+      Periogard: "",
+      Orthogard: "",
+      Total12: "",
+      LuminousWhite: ""
    });
 
    let url = RoutersLinks.Capacitacion.split('/');

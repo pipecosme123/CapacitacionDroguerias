@@ -2,6 +2,8 @@ import React from 'react';
 import { Imagenes } from '../Constantes/Imagenes';
 import SliderImg from '../Componentes/SliderImg';
 import '../css/Home.css';
+import { RoutersLinks } from '../Constantes/RoutersLinks';
+import { HiChevronDoubleRight } from 'react-icons/hi';
 
 const Home = () => {
    return (
@@ -12,6 +14,10 @@ const Home = () => {
             </div>
          </div>
          <div className="informacionPrincipal">
+            <a className="LinkRedireccinar" href={RoutersLinks.MenuCapacitacion}>
+               <h1>Ir a la Capacitación</h1><br />
+               <HiChevronDoubleRight />
+            </a>
             <div className="Content">
                <h1 className='titulo'>Aquí encontrarás</h1>
                <div className="informaciones">

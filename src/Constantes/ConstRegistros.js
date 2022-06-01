@@ -16,7 +16,7 @@ export const drogerias = [
    { distr: "Medimarcas" },
    { distr: "Drocentro Ltda" },
    { distr: "Colsubsidio" },
-   { distr: "OCC" },
+   // { distr: "OCC" },
 ];
 
 export const Regiones = [

@@ -48,7 +48,7 @@ const Quiz = ({ nombreQuiz, handleCapacitacion, idVideoC }) => {
          }
       }
 
-      // console.log(newArray);
+      console.log(newArray);
 
       setClassButton(newArray);
       setNext(true);
@@ -73,7 +73,7 @@ const Quiz = ({ nombreQuiz, handleCapacitacion, idVideoC }) => {
          producto = "LuminousWhite";
       }
 
-      // console.log(producto, idVideo);
+      console.log(producto, idVideo);
       return producto;
    }
 
@@ -83,10 +83,10 @@ const Quiz = ({ nombreQuiz, handleCapacitacion, idVideoC }) => {
       let nombreVariableLocal = `Pregunta${numPregunta + 1}_${textApiVideo}`;
       let apiVideo = JSON.parse(window.localStorage.getItem('data'));
 
-      // console.log(apiVideo[nombreVariableLocal]);
+      console.log(apiVideo[nombreVariableLocal]);
 
       if (apiVideo[nombreVariableLocal] === '-') {
-         // // console.log("apiVideo[nombreVariableLocal]");
+         // console.log("apiVideo[nombreVariableLocal]");
          let idUduario = cookies.get("idUsuario");
 
          let datosCapacitacion = {
@@ -109,7 +109,7 @@ const Quiz = ({ nombreQuiz, handleCapacitacion, idVideoC }) => {
          setClassButton([]);
          setNext(false);
       }
-      // console.log(numPregunta, countPreguntas, numPregunta < countPreguntas);
+      console.log(numPregunta, countPreguntas, numPregunta < countPreguntas);
    }
 
    const changeVideo = () => {

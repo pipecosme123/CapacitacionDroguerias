@@ -70,7 +70,7 @@
       width: 60%;
    }
 
-   .NavBar .container .nav-navegacion a.navLink {
+   .NavBar .container .nav-navegacion a.navLink, .NavBar .container .nav-navegacion button.navLink {
       font-size: 1em;
    }
 }
@@ -98,7 +98,7 @@
       justify-content: flex-end;
    }
 
-   .NavBar .container .nav-navegacion a.navLink {
+   .NavBar .container .nav-navegacion a.navLink, .NavBar .container .nav-navegacion button.navLink {
       display: none;
    }
 

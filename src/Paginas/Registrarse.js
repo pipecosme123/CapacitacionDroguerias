@@ -107,6 +107,7 @@ const Registrarse = () => {
                            <p>Zonas Equipo ACF</p>
                            <select name="region" className='selectDistribuidor' defaultValue='/' onChange={handleChange} onBlur={handleBlur}>
                               <option disabled value="/">Elige una opción</option>
+                              <option value={"OCC"}>OCC</option>
                               {Regiones.map((item, index) => (
                                  <>
                                     <option key={index} disabled value="/">{item.cabecera}</option>
