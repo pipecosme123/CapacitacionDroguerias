@@ -1,3 +1,4 @@
+import { productosCapacitacion } from "./Imagenes";
 import LuminousWhite from "./Textos/LuminousWhite";
 import Orthogard from "./Textos/Orthogard";
 import Periogard from "./Textos/Periogard";
@@ -44,24 +45,45 @@ export const Capacitaciones = [
    }
 ]
 
-// Periogard
-
-// Orthogard
-
-// Total 12
-
-// Luminous White
-
-// sensitive
-
-// perio
-
-// ortho
-
-// total
-
-// luminus
-
-
-
-
+export const MenuCap = [
+   {
+      titulo: "Colgate Sensitive Pro-Alivio",
+      tituloAPI: "SensitiveProAlivio",
+      imagen: productosCapacitacion.luminous,
+      descarga: "ColgateSensitiveProAlivio.pdf",
+      nombreDescarga: "Colgate Sensitive Pro-Alivio.pdf",
+      visto: true
+   },
+   {
+      titulo: "Colgate Periogard",
+      tituloAPI: "Periogard",
+      imagen: productosCapacitacion.periogard,
+      descarga: "ColgatePerioGard.pdf",
+      nombreDescarga: "Colgate PerioGard.pdf",
+      visto: false
+   },
+   {
+      titulo: "Colgate Orthogard",
+      tituloAPI: "Orthogard",
+      imagen: productosCapacitacion.ortogard,
+      descarga: "ColgateOrthoGard.pdf",
+      nombreDescarga: "Colgate OrthoGard.pdf",
+      visto: false
+   },
+   {
+      titulo: "Colgate Total 12 Gums",
+      tituloAPI: "Total12",
+      imagen: productosCapacitacion.total12,
+      descarga: "ColgateTotal12EnciasReforzadas.pdf",
+      nombreDescarga: "Colgate Total 12 Encías Reforzadas.pdf",
+      visto: false
+   },
+   {
+      titulo: "Colgate Luminous White",
+      tituloAPI: "LuminousWhite",
+      imagen: productosCapacitacion.luminous,
+      descarga: "ColgateLuminousWhite.pdf",
+      nombreDescarga: "Colgate Luminous White.pdf",
+      visto: false
+   },
+]

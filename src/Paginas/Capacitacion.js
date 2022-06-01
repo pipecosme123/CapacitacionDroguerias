@@ -1,35 +1,106 @@
-import React, { useState } from 'react';
-import { MdFileDownload, MdOutlineArrowBackIosNew, MdOutlineArrowForwardIos } from 'react-icons/md';
+import React, { useEffect, useState } from 'react';
+import { MdFileDownload } from 'react-icons/md';
 import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri';
 import { Imagenes } from '../Constantes/Imagenes';
 import { Capacitaciones } from '../Constantes/Capacitaciones';
 import ReactPlayer from 'react-player';
 import Quiz from '../Componentes/Quiz';
 import '../css/Capacitacion.css';
+import { useParams } from 'react-router-dom';
+import { useForm } from '../hooks/useForm';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const Capacitacion = () => {
 
    const [masTexto, setMasTexto] = useState(false);
    const [showQuiz, setShowQuiz] = useState(false);
 
-   const [video, setVideo] = useState(0);
+   const {
+      handleShowCapacitacion
+   } = useForm();
+
+   let { id } = useParams();
+
+   const [video, setVideo] = useState(parseInt(id));
 
    let contentCap = Capacitaciones[video];
-   // let contentPrev = Capacitaciones[video - 1].titulo;
-   // let contentNext = Capacitaciones[video + 1].titulo;
-// 
-   const hadleCapacitacion = () => {
+
+   const handleCapacitacion = () => {
       console.log(video);
-      if(video < 4){
+      if (video < 4) {
          setVideo(video + 1);
          setShowQuiz(false);
          setMasTexto(false)
-      }else{
+      } else {
          setVideo(0);
          setShowQuiz(false);
          setMasTexto(false)
       }
    }
+
+   const getProducto = (idVideo) => {
+      let producto;
+
+      if (idVideo === 0) {
+         producto = "SensitiveProAlivio";
+      }
+      else if (idVideo === 1) {
+         producto = "Periogard";
+      }
+      else if (idVideo === 2) {
+         producto = "Orthogard";
+      }
+      else if (idVideo === 3) {
+         producto = "Total12";
+      }
+      else if (idVideo === 4) {
+         producto = "LuminousWhite";
+      }
+
+      console.log(producto, idVideo);
+      return producto;
+   }
+
+   const viewQuiz = () => {
+
+      let textApiVideo = getProducto(parseInt(id));
+      let apiVideo = JSON.parse(window.localStorage.getItem('data'));
+
+      if (apiVideo[textApiVideo] === "NO") {
+         postVistoVideo();
+      }
+      changeLocalStorage();
+      setShowQuiz(true)
+   }
+
+   const postVistoVideo = () => {
+      let idUduario = cookies.get("idUsuario");
+      let idVideo = video + 1;
+
+      let datosCapacitacion = {
+         url: "ViewCapacitacion",
+         idUsuario: idUduario,
+         idProducto: idVideo
+      }
+      handleShowCapacitacion(datosCapacitacion);
+   }
+
+   const changeLocalStorage = () => {
+
+      let textApiVideo = getProducto(parseInt(id));
+      let apiVideo = JSON.parse(window.localStorage.getItem('data'));
+
+      apiVideo[textApiVideo] = "SI";
+
+      window.localStorage.setItem('data', JSON.stringify(apiVideo));
+
+   }
+
+   useEffect(() => {
+
+   }, []);
 
    return (
       <div className='Capacitacion'>
@@ -48,20 +119,11 @@ const Capacitacion = () => {
                         }
                      }}
                      controls
-                     onEnded={() => setShowQuiz(true)}
+                     onEnded={() => viewQuiz()}
                   />
                </div>
             </div>
-            {/* <div className="botonesVideos">
-               <div className="botonPrev">
-                  <MdOutlineArrowBackIosNew />
-                  <h3>{contentPrev}</h3>
-               </div>
-               <div className="botonNext">
-                  <MdOutlineArrowForwardIos />
-                  <h3>{contentNext}</h3>
-               </div>
-            </div> */}
+
          </div>
 
          <div className="informacion Content">
@@ -99,7 +161,7 @@ const Capacitacion = () => {
 
          {showQuiz &&
             <div className="Content">
-               <Quiz nombreQuiz={contentCap.nombreQuiz} hadleCapacitacion={hadleCapacitacion} />
+               <Quiz idVideoC={id} nombreQuiz={contentCap.nombreQuiz} handleCapacitacion={handleCapacitacion} />
             </div>
          }
       </div>

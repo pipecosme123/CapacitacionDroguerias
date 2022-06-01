@@ -41,6 +41,7 @@
    flex-direction: column;
    justify-content: center;
    text-align: center;
+   z-index: 10000;
 }
 
 .contenidoPerfil:before {

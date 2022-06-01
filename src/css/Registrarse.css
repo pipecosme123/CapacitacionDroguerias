@@ -2,6 +2,7 @@
    width: 100%;
    max-height: 100vh;
    display: flex;
+   overflow: hidden;
 }
 
 .imgPortada {
@@ -14,7 +15,7 @@
    object-fit: cover;
 }
 
-.formRegistrarse {
+.seccionForm {
    width: 50%;
    height: 100vh;
    background: var(--color-gris);
@@ -24,11 +25,24 @@
    align-items: center;
 }
 
-.formRegistrarse .selectDistribuidor{
+.formRegistrarse {
    width: 100%;
-   font-family: "Light";
-   font-size: 1.2em;
-   padding: 1em;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.seccionForm .nav-imgLogo {
+   width: min-content;
+   height: 6em;
+   position: absolute;
+   top: 0;
+   /* left: 15em; */
+}
+
+.seccionForm .nav-imgLogo img {
+   height: 100%;
 }
 
 .formRegistrarse h1 {
@@ -37,8 +51,13 @@
    color: var(--color-colgate);
 }
 
+.formRegistrarse .contentInputs {
+   margin-bottom: 1em;
+}
+
 .formRegistrarse form {
-   width: 100%;
+   width: 50%;
+   /* margin-left: 8em; */
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -50,34 +69,158 @@
    font-size: 1.2em;
 }
 
-.formRegistrarse input.inputCorreo {
-   width: 60%;
+.formRegistrarse .selectDistribuidor {
+   width: 480px !important;
    padding: 1em;
-   margin: 2em 0 0.5em;
+   margin: 0.5em 0 0.5em;
+   font-family: "Light";
+   font-size: 1em;
+   color: var(--color-gris-oscuro);
+   border: 2px solid transparent;
+   border-radius: 2em;
+   align-self: flex-start;
+}
+
+.formRegistrarse option:disabled {
+   background: rgb(170, 170, 170);
+   font-weight: 500;
+   color: #fff;
+}
+
+.formRegistrarse input.inputCorreo {
+   width: 480px !important;
+   padding: 1em;
+   margin: 0.5em 0 0.5em;
    font-family: "Light";
    font-size: 1em;
    border: 2px solid transparent;
    border-radius: 2em;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+
+input[type=number] {
+   -moz-appearance: textfield;
+}
+
 .formRegistrarse input.inputCorreo:focus,
-.formRegistrarse input.inputCorreo:active {
+.formRegistrarse input.inputCorreo:active,
+.formRegistrarse .selectDistribuidor:focus,
+.formRegistrarse .selectDistribuidor:active {
    border: 2px solid #d2010c4d;
    outline: none;
 }
 
-.formRegistrarse button.buttonSubmit {
+.formRegistrarse button,
+.formRegistrarse a {
+   width: 70%;
    padding: 0.3em 2em;
    font-family: "Bold";
    font-size: 1.5em;
-   color: #fff;
-   background: var(--color-colgate);
    border: 0px;
    border-radius: 1em;
    cursor: pointer;
+   transition: 90ms;
+}
+
+.formRegistrarse button.buttonSubmit {
+   color: #fff;
+   background: var(--color-colgate);
 }
 
 .formRegistrarse button.buttonSubmit:hover {
    transform: scale(1.05);
    background: #f0000c;
+}
+
+.formRegistrarse .seccionLoginRegistro {
+   width: 100%;
+   margin-top: 2em;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.formRegistrarse .seccionLoginRegistro p {
+   font-size: 1em;
+}
+
+.seccionLoginRegistro a.linkSeccion {
+   width: 30%;
+   margin-top: 1em;
+   font-size: 1em;
+   text-align: center;
+   text-decoration: none;
+   color: var(--color-gris-oscuro);
+   border: 1px solid var(--color-gris-oscuro);
+}
+
+.seccionLoginRegistro a.linkSeccion:hover {
+   color: #fff;
+   background: #009CA6;
+   border: 1px solid #009CA6;
+   transform: scale(1.05);
+}
+
+@media only screen and (max-width: 1400px) {
+
+   .seccionForm .nav-imgLogo {
+      height: 4em;
+   }
+
+   .formRegistrarse .contentInputs {
+      margin-bottom: 0.5em;
+      /* font-family: em; */
+   }
+
+   .formRegistrarse .selectDistribuidor {
+      padding: 0.5em;
+      margin: 0.5em 0 0.5em;
+      width: 200px !important;
+   }
+
+   .formRegistrarse input.inputCorreo {
+      padding: 0.5em;
+      margin: 0.5em 0 0;
+   }
+
+   .formRegistrarse button,
+   .formRegistrarse a {
+      width: 70%;
+      margin-top: 1em;
+      padding: 0.3em 2em;
+      font-size: 1.2em;
+   }
+
+   .formRegistrarse .seccionLoginRegistro {
+      width: 100%;
+      margin-top: 1em;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+   }
+
+   .formRegistrarse .selectsInputs{
+      display: flex;
+   }
+
+   .formRegistrarse .selectsInputs .contentInputs:nth-child(1){
+      margin-right: 2em;
+   }
+
+   .formRegistrarse p {
+      font-size: 1em;
+   }
+
+   .seccionLoginRegistro a.linkSeccion {
+      width: 30%;
+      margin-top: 0;
+      margin-left: 1em;
+      font-size: 1em;
+   }
 }

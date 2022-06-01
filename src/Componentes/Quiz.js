@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { HiChevronDoubleRight } from 'react-icons/hi';
+import { AiOutlineMenu } from 'react-icons/ai';
 import { PreguntasQuiz } from '../Constantes/PreguntasQuiz';
+import { RoutersLinks } from '../Constantes/RoutersLinks';
 import '../css/Quiz.css';
+import { useForm } from '../hooks/useForm';
+import Cookies from 'universal-cookie';
 
-const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
+const cookies = new Cookies();
+
+const Quiz = ({ nombreQuiz, handleCapacitacion, idVideoC }) => {
 
    const [numPregunta, setNumPregunta] = useState(0);
    const [score, setScore] = useState(0);
    const [next, setNext] = useState(false);
+
+   const {
+      handleShowCapacitacion
+   } = useForm();
 
    let pregunta = PreguntasQuiz[nombreQuiz][numPregunta];
    let countPreguntas = Object.keys(PreguntasQuiz[nombreQuiz]).length;
 
    const [classButton, setClassButton] = useState([]);
 
-   const mostrarRespuestas = (position) => {
+   const mostrarRespuestas = (position, positionAPI) => {
 
       let nunRespuestas = pregunta.opciones.length;
       let newArray = [];
@@ -23,9 +33,11 @@ const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
          if (position === i) {
             if (pregunta.opciones[i].respuesta === true) {
                newArray[i] = "correcto";
+               changeLocalStorage(positionAPI);
                setScore(score + 1);
             } else {
                newArray[i] = "incorrectoSeleccionada";
+               changeLocalStorage(positionAPI);
             }
          } else {
             if (pregunta.opciones[i].respuesta === true) {
@@ -42,6 +54,54 @@ const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
       setNext(true);
    }
 
+   const getProducto = (idVideo) => {
+      let producto;
+
+      if (idVideo === 0) {
+         producto = "SensitiveProAlivio";
+      }
+      else if (idVideo === 1) {
+         producto = "Periogard";
+      }
+      else if (idVideo === 2) {
+         producto = "Orthogard";
+      }
+      else if (idVideo === 3) {
+         producto = "Total12";
+      }
+      else if (idVideo === 4) {
+         producto = "LuminousWhite";
+      }
+
+      console.log(producto, idVideo);
+      return producto;
+   }
+
+   const changeLocalStorage = (idApi) => {
+
+      let textApiVideo = getProducto(parseInt(idVideoC));
+      let nombreVariableLocal = `Pregunta${numPregunta + 1}_${textApiVideo}`;
+      let apiVideo = JSON.parse(window.localStorage.getItem('data'));
+
+      console.log(apiVideo[nombreVariableLocal]);
+
+      if (apiVideo[nombreVariableLocal] === '-') {
+         // console.log("apiVideo[nombreVariableLocal]");
+         let idUduario = cookies.get("idUsuario");
+
+         let datosCapacitacion = {
+            url: "Quiz",
+            idUsuario: idUduario,
+            idOpcionRespuesta: idApi
+         }
+
+         handleShowCapacitacion(datosCapacitacion);
+
+         apiVideo[nombreVariableLocal] = "SI";
+         window.localStorage.setItem('data', JSON.stringify(apiVideo));
+      }
+   }
+
    const siguientePregunta = (valor) => {
 
       if (numPregunta < countPreguntas) {
@@ -53,11 +113,11 @@ const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
    }
 
    const changeVideo = () => {
-      hadleCapacitacion();
+      handleCapacitacion();
    }
 
    useEffect(() => {
-      window.scroll(0, 0); 
+      window.scroll(0, 0);
    }, []);
 
    return (
@@ -74,7 +134,7 @@ const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
 
                   {pregunta.opciones.map((opt, index) => (
                      <div key={index} className="opcionesRespuestas">
-                        <button className={`opciones ${classButton[index] && classButton[index]}`} onClick={() => !next && mostrarRespuestas(index)}>
+                        <button className={`opciones ${classButton[index] && classButton[index]}`} onClick={() => !next && mostrarRespuestas(index, opt.idApiDB)}>
                            {opt.texto}
                         </button>
                      </div>
@@ -93,9 +153,14 @@ const Quiz = ({ nombreQuiz, hadleCapacitacion }) => {
                   <p></p>
                   <div className="footer2">
                      <hr />
-                     <button className={`siguientePregunta`} onClick={() => changeVideo()}>
-                        Continuar <HiChevronDoubleRight />
-                     </button>
+                     <div className="botonesFooter">
+                        <button className={`siguientePregunta`} onClick={() => window.location.pathname = RoutersLinks.MenuCapacitacion}>
+                           Volver al menú <AiOutlineMenu />
+                        </button>
+                        <button className={`siguientePregunta`} onClick={() => changeVideo()}>
+                           Continuar <HiChevronDoubleRight />
+                        </button>
+                     </div>
                   </div>
                </div>
             }

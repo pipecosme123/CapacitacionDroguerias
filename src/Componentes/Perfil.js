@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie';
 import { RoutersLinks } from '../Constantes/RoutersLinks';
 import '../css/Perfil.css';
 
@@ -7,17 +7,16 @@ const Perfil = () => {
 
    const [show, setShow] = useState(false);
 
-   // const cookies = new Cookies();
+   const cookies = new Cookies();
    // const usuario = `${cookies.get('nombresUsuarios')} ${cookies.get('apellidosUsuarios')}`; 
    const usuario = `Prueba Prueba`; 
 
    const cerrarSesion = () => {
 
-      // let listCookies = cookies.getAll();
+      cookies.remove("correoUsuario");
+      cookies.remove("idUsuario");
 
-      // for (const property in listCookies) {
-      //    cookies.remove(property);
-      // }
+      localStorage.removeItem('data');
 
       window.location.pathname = RoutersLinks.Login;
    }
