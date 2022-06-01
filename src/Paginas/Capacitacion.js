@@ -121,6 +121,7 @@ const Capacitacion = () => {
                            quality: 'auto'
                         }
                      }}
+                     volumen={1}
                      controls
                      onEnded={() => viewQuiz()}
                   />

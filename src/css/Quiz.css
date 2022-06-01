@@ -32,6 +32,10 @@
    font-size: 1.2em;
 }
 
+.Quiz .divOpciones{
+   width: 100%;
+}
+
 .Quiz .opcionesRespuestas {
    width: 90%;
    margin: 0 auto;
@@ -158,5 +162,17 @@
       padding: 0.5em 1em;
       margin: 0.5em auto;
    }
-   
+}
+
+@media only screen and (max-width: 480px) {
+   .Quiz {
+      width: 80%;
+      position: fixed;
+      top: 1vw;
+      left: 1vh;
+  }
+
+  .Quiz Button.opciones {
+   font-size: 1em;
+}
 }

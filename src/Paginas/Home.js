@@ -13,11 +13,11 @@ const Home = () => {
          </div>
          <div className="informacionPrincipal">
             <div className="Content">
-               <h1 className='titulo'>Aquí encontraras</h1>
+               <h1 className='titulo'>Aquí encontrarás</h1>
                <div className="informaciones">
                   <div className="informacion">
                      <img src={Imagenes.videos} alt="" />
-                     <h3>Vídeos Explicativos</h3>
+                     <h3>Videos Explicativos</h3>
                      <p>Videos cortos referentes a los productos Colgate, donde se explican; formulación, beneficios y recomendaciones, de acuerdo a cada condición.</p>
                      <p>Los videos tienen una duración no mayor a 4 minutos.</p>
                   </div>

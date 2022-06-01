@@ -5,7 +5,7 @@ export const PreguntasQuiz = {
          opciones: [
             {
                idApiDB: "1",
-               texto: "Crema Colgate Periogard",
+               texto: "Crema Colgate PerioGard",
                respuesta: false
             },
             {
@@ -68,7 +68,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "10",
-               texto: "Enjuague Colgate Periogard",
+               texto: "Enjuague Colgate PerioGard",
                respuesta: true
             },
             {
@@ -78,7 +78,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "12",
-               texto: "Enjuague Colgate Orthogard",
+               texto: "Enjuague Colgate OrthoGard",
                respuesta: false
             }
          ]
@@ -93,7 +93,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "14",
-               texto: "Cepillo Colgate Orthogard",
+               texto: "Cepillo Colgate OrthoGard",
                respuesta: false
             },
             {
@@ -103,7 +103,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "16",
-               texto: "Cepillo Colgate Periogard",
+               texto: "Cepillo Colgate PerioGard",
                respuesta: true
             }
          ]
@@ -128,7 +128,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "20",
-               texto: "Crema Colgate Periogard",
+               texto: "Crema Colgate PerioGard",
                respuesta: true
             }
          ]
@@ -145,7 +145,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "22",
-               texto: "Cepillo Colgate Orthogard",
+               texto: "Cepillo Colgate OrthoGard",
                respuesta: true
             },
             {
@@ -155,7 +155,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "24",
-               texto: "Cepillo Colgate Periogard",
+               texto: "Cepillo Colgate PerioGard",
                respuesta: false
             }
          ]
@@ -180,7 +180,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "28",
-               texto: "Crema Colgate Periogard",
+               texto: "Crema Colgate PerioGard",
                respuesta: true
             }
          ]
@@ -195,7 +195,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "30",
-               texto: "Enjuague Colgate Periogard",
+               texto: "Enjuague Colgate PerioGard",
                respuesta: false
             },
             {
@@ -205,7 +205,7 @@ export const PreguntasQuiz = {
             },
             {
                idApiDB: "32",
-               texto: "Enjuague Colgate Orthogard",
+               texto: "Enjuague Colgate OrthoGard",
                respuesta: true
             }
          ]
@@ -217,7 +217,7 @@ export const PreguntasQuiz = {
          opciones: [
             {
                idApiDB: "33",
-               texto: "Crema dental Colgate Periogard",
+               texto: "Crema dental Colgate PerioGard",
                respuesta: false
             },
             {

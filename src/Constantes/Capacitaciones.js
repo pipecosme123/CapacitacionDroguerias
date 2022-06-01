@@ -14,14 +14,14 @@ export const Capacitaciones = [
       nombreQuiz: "sensitive"
    },
    {
-      titulo: "Colgate Periogard",
+      titulo: "Colgate PerioGard",
       video: "https://vimeo.com/708422887",
       descripcionCorta: `Estimado Droguista, le damos la bienvenida a esta capacitación virtual sobre la línea PERIOGARD Esperamos que este material sea de su total agrado y utilidad en el acompañamiento a sus clientes. Una de las condiciones más frecuentes de la cavidad oral es la inflamación de la encía o gingivitis, la cual es causada por la acumulación de placa bacteriana y restos de alimentos que no son removidos correctamente alrededor de los dientes, generando enrojecimiento, sangrado e inflamación de la encía.`,
       descripcion: <Periogard />,
       nombreQuiz: "periogard"
    },
    {
-      titulo: "Colgate Orthogard",
+      titulo: "Colgate OrthoGard",
       video: "https://vimeo.com/708422775",
       descripcionCorta: `Estimado Droguista, le damos la bienvenida a esta capacitación virtual sobre la línea OrthoGard Esperamos que este material sea de su total agrado y utilidad en el acompañamiento a sus clientes.
       La ortodoncia o uso de brackets va en aumento en todas las edades y esto implica un riesgo de caries e inflamación de las encías, por la dificultad para realizar la higiene oral. Es por eso que en Colgate contamos con la línea especializada OrthoGard, desarrollada para brindar un mejor cuidado de dientes y encías en estos casos.`,
@@ -49,13 +49,13 @@ export const MenuCap = [
    {
       titulo: "Colgate Sensitive Pro-Alivio",
       tituloAPI: "SensitiveProAlivio",
-      imagen: productosCapacitacion.luminous,
+      imagen: productosCapacitacion.sensitive,
       descarga: "ColgateSensitiveProAlivio.pdf",
       nombreDescarga: "Colgate Sensitive Pro-Alivio.pdf",
       visto: true
    },
    {
-      titulo: "Colgate Periogard",
+      titulo: "Colgate PerioGard",
       tituloAPI: "Periogard",
       imagen: productosCapacitacion.periogard,
       descarga: "ColgatePerioGard.pdf",
@@ -63,7 +63,7 @@ export const MenuCap = [
       visto: false
    },
    {
-      titulo: "Colgate Orthogard",
+      titulo: "Colgate OrthoGard",
       tituloAPI: "Orthogard",
       imagen: productosCapacitacion.ortogard,
       descarga: "ColgateOrthoGard.pdf",

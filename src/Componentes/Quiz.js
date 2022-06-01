@@ -132,13 +132,15 @@ const Quiz = ({ nombreQuiz, handleCapacitacion, idVideoC }) => {
                   <h3>Pregunta #{numPregunta + 1}</h3>
                   <p>{pregunta.pregunta}</p>
 
-                  {pregunta.opciones.map((opt, index) => (
-                     <div key={index} className="opcionesRespuestas">
-                        <button className={`opciones ${classButton[index] && classButton[index]}`} onClick={() => !next && mostrarRespuestas(index, opt.idApiDB)}>
-                           {opt.texto}
-                        </button>
-                     </div>
-                  ))}
+                  <div className="divOpciones">
+                     {pregunta.opciones.map((opt, index) => (
+                        <div key={index} className="opcionesRespuestas">
+                           <button className={`opciones ${classButton[index] && classButton[index]}`} onClick={() => !next && mostrarRespuestas(index, opt.idApiDB)}>
+                              {opt.texto}
+                           </button>
+                        </div>
+                     ))}
+                  </div>
 
                   <hr />
 

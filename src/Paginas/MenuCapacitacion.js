@@ -74,6 +74,13 @@ const MenuCapacitacion = () => {
                         <div onClick={() => descargaMaterial(item.descarga, item.nombreDescarga)} className='descargaMaterial'> <MdFileDownload /> </div>
                      }
                      <Link to={`/${url[1]}/${index}`} className='verCapacitacion'>Ver ahora</Link>
+
+                     <div className="buttonsMobile">
+                        {productos[item.tituloAPI] === "SI" &&
+                           <div onClick={() => descargaMaterial(item.descarga, item.nombreDescarga)} className='descargaMaterial mobile'> <MdFileDownload /> </div>
+                        }
+                        <Link to={`/${url[1]}/${index}`} className='verCapacitacion mobile'>Ver ahora</Link>
+                     </div>
                   </div>
 
                ))}

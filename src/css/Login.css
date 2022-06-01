@@ -34,14 +34,14 @@
 }
 
 .seccionForm .nav-imgLogo {
-   width: min-content; 
+   width: min-content;
    height: 6em;
    position: absolute;
    top: 0;
    /* left: 15em; */
 }
 
-.seccionForm .nav-imgLogo img{
+.seccionForm .nav-imgLogo img {
    height: 100%;
 }
 
@@ -133,6 +133,24 @@
    transform: scale(1.05);
 }
 
-.errorText{
+.errorText {
    color: #d2010d;
+}
+
+@media only screen and (max-width: 480px) {
+   .imgPortada{
+      display: none;
+   }
+
+   .seccionForm {
+      width: 100% !important;
+  }
+
+  .formIniciarSesion button, .formIniciarSesion a {
+   width: 70% !important;
+}
+
+.seccionLoginRegistro a.linkSeccion{
+   margin: 0 !important;
+}
 }

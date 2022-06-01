@@ -5,7 +5,6 @@ import { RoutersLinks } from '../Constantes/RoutersLinks';
 import Capacitacion from '../Paginas/Capacitacion';
 import Home from '../Paginas/Home';
 import Login from '../Paginas/Login';
-import Material from '../Paginas/Material';
 import MenuCapacitacion from '../Paginas/MenuCapacitacion';
 import Registrarse from '../Paginas/Registrarse';
 
@@ -29,7 +28,6 @@ const RouterDom = () => {
             <Route exact path={RoutersLinks.Home} element={<Home />} />
             <Route exact path={RoutersLinks.MenuCapacitacion} element={<MenuCapacitacion />} />
             <Route exact path={RoutersLinks.Capacitacion} element={<Capacitacion />} />
-            <Route exact path={RoutersLinks.Material} element={<Material />} />
          </Routes>
 
          {pathName !== RoutersLinks.Login &&

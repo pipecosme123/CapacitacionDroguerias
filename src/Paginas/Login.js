@@ -39,7 +39,8 @@ const Login = () => {
    } = useForm(initialForm, validationForm);
 
    useEffect(() => {
-      if (responseApi && data !== undefined) {
+     
+      if (responseApi && data !== 'undefined') {
 
          window.localStorage.setItem("data", JSON.stringify(data[0]));
          cookies.set("idUsuario", data[0].idUsuarios, { path: '/' });
@@ -81,7 +82,7 @@ const Login = () => {
                   </div>
                }
 
-               {responseApi && data === undefined &&
+               {responseApi && data === 'undefined' &&
                   <div className='alert danger'  >
                      <b>El correo electrónico es incorrecto</b> <br />
                      Vuelve a intentarlo

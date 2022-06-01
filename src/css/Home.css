@@ -1,10 +1,10 @@
-.sliders{
+.sliders {
    margin-bottom: 3em;
    padding: 1em 0;
    background-color: var(--color-gris);
 }
 
-.sliders img{
+.sliders img {
    width: 90%;
 }
 
@@ -13,19 +13,19 @@
    justify-content: center;
 }
 
-.informacionPrincipal .titulo{
+.informacionPrincipal .titulo {
    font-family: "BoldItalic";
    font-size: 3em;
    color: var(--color-colgate);
    text-align: center;
 }
 
-.informacionPrincipal .informaciones{
+.informacionPrincipal .informaciones {
    display: flex;
    justify-content: space-between;
 }
 
-.informacionPrincipal .informaciones .informacion{
+.informacionPrincipal .informaciones .informacion {
    width: 30%;
    padding: 2em 1em;
    display: flex;
@@ -35,18 +35,18 @@
    border-radius: 1em;
 }
 
-.informaciones .informacion img{
+.informaciones .informacion img {
    width: 50%;
 }
 
-.informaciones .informacion h3{
+.informaciones .informacion h3 {
    margin-bottom: 0;
    font-size: 2em;
    text-align: center;
    color: var(--color-colgate);
 }
 
-.informaciones .informacion p{
+.informaciones .informacion p {
    padding: 0 2em;
    text-align: justify;
    font-family: "Light";
@@ -54,24 +54,48 @@
 }
 
 @media only screen and (max-width: 1400px) {
-   .sliders img{
+   .sliders img {
       width: 80%;
    }
 
-   .informacionPrincipal .informaciones{
+   .informacionPrincipal .informaciones {
       padding: 0 7em;
-   }   
+   }
 
-   .informacionPrincipal .informaciones .informacion{
+   .informacionPrincipal .informaciones .informacion {
       width: 26%;
    }
-   
-   .informaciones .informacion h3{
+
+   .informaciones .informacion h3 {
       font-size: 1.4em;
    }
-   
-   .informaciones .informacion p{
+
+   .informaciones .informacion p {
       padding: 0 1em;
       font-size: 1em;
    }
+}
+
+@media only screen and (max-width: 480px) {
+   .sliders img {
+      width: 100%;
+   }
+
+   .informacionPrincipal .titulo {
+      font-size: 2em;
+   }
+
+   .informacionPrincipal .informaciones {
+      padding: 0;
+   }
+
+   .informacionPrincipal .informaciones {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .informacionPrincipal .informaciones .informacion {
+      width: 90%;
+      margin-bottom: 1em;
+  }
 }

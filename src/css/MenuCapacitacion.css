@@ -122,6 +122,10 @@
    /* background: #d6d6d6; */
 }
 
+.MenuCapacitacion .buttonsMobile{
+   display: none;
+}
+
 
 @media only screen and (max-width: 1400px) {
    .MenuCapacitacion .capVideos .nameContent {
@@ -130,5 +134,69 @@
 
    .MenuCapacitacion .capVideos .nameContent h3 {
       font-size: 1.3em;
-  }
+   }
+}
+
+@media only screen and (max-width: 480px) {
+   .MenuCapacitacion {
+      padding: 2em 0 3em;
+   }
+
+   .MenuCapacitacion h1.titulo {
+      font-size: 2em;
+   }
+
+   .MenuCapacitacion .capVideos {
+      width: 95%;
+      height: auto;
+      margin-bottom: 1em;
+      padding: 0.5em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 1em;
+      background: #fff;
+   }
+
+   .capVideos .status {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+   }
+
+   .MenuCapacitacion .capVideos .nameContent {
+      width: 100%;
+      flex-direction: column;
+   }
+
+   .MenuCapacitacion .capVideos .nameContent h3 {
+      font-size: 1.3em;
+      margin-left: 0;
+   }
+
+   .MenuCapacitacion .capVideos .nameContent .imgContent {
+      width: 200px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 2em;
+   }
+
+   .MenuCapacitacion .capVideos .descargaMaterial,
+   .MenuCapacitacion .capVideos a.verCapacitacion {
+      display: none;
+   }
+   
+   .MenuCapacitacion .capVideos a.verCapacitacion.mobile {
+      display: block;
+      margin: 0;
+   }
+
+   .MenuCapacitacion .capVideos .buttonsMobile {
+      width: 100%;
+      height: min-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
 }

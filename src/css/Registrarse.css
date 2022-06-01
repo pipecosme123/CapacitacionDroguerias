@@ -205,11 +205,11 @@ input[type=number] {
       align-items: center;
    }
 
-   .formRegistrarse .selectsInputs{
+   .formRegistrarse .selectsInputs {
       display: flex;
    }
 
-   .formRegistrarse .selectsInputs .contentInputs:nth-child(1){
+   .formRegistrarse .selectsInputs .contentInputs:nth-child(1) {
       margin-right: 2em;
    }
 
@@ -222,5 +222,32 @@ input[type=number] {
       margin-top: 0;
       margin-left: 1em;
       font-size: 1em;
+   }
+}
+
+@media only screen and (max-width: 480px) {
+   .formRegistrarse .selectsInputs {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .formRegistrarse .formCampos {
+      width: 90%;
+   }
+
+   .formRegistrarse form {
+      width: 100%;
+   }
+
+   .formRegistrarse input.inputCorreo {
+      width: 250px !important;
+   }
+
+   .formRegistrarse .seccionLoginRegistro {
+      width: 100%;
+      margin-top: 1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
    }
 }

@@ -4,7 +4,7 @@ export const RoutersLinks = {
    Home: "/Home",
    MenuCapacitacion: "/Menu",
    Capacitacion: "/Capacitacion/:id",
-   Material: "/Material"
+   Descubre: "http://colgate.com/es-co"
 }
 
-export const urlApi = "http://localhost:2142";
+export const urlApi = "https://crecerconcolgate.col1.co/api";

@@ -7,6 +7,7 @@ import imgPortada from "../Imagenes/imgportada.png";
 
 import slider1 from "../Imagenes/slider/slider1.png";
 
+import prod_gsensitive from "../Imagenes/productos/gsensitive.png";
 import prod_gluminousw from "../Imagenes/productos/gluminousw.png";
 import prod_gorthogard from "../Imagenes/productos/gorthogard.png";
 import prod_gperiogard from "../Imagenes/productos/gperiogard.png";
@@ -39,7 +40,7 @@ export const slider = [
 ];
 
 export const productosCapacitacion = {
-   // sensitive: slider1,
+   sensitive: prod_gsensitive,
    periogard: prod_gperiogard,
    ortogard: prod_gorthogard,
    total12: prod_gtotal12,
