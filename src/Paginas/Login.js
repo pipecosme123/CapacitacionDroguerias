@@ -39,7 +39,7 @@ const Login = () => {
    } = useForm(initialForm, validationForm);
 
    useEffect(() => {
-     
+
       if (responseApi && data !== 'undefined') {
 
          window.localStorage.setItem("data", JSON.stringify(data[0]));
@@ -62,16 +62,21 @@ const Login = () => {
                <img src={Imagenes.Logo} alt="" />
             </div>
             <div className="formIniciarSesion">
-               <h1>Iniciar Sesión</h1>
+
+               <div className="seccionLogin">
+                  <p>¿Aún no estás registrado?</p>
+                  <Link className='linkSeccion' to={RoutersLinks.Registrarse}>Registrarse</Link>
+               </div>
+               
+               <hr />
+               {/* <h1>Iniciar Sesión</h1> */}
                <form onSubmit={handleSubmit}>
-                  <p htmlFor="inputCorreo">Correo Electrónico</p>
+
+                  <p htmlFor="inputCorreo">Si usted está registrado, ingrese su correo</p>
                   <input type="text" id='inputCorreo' name='inputCorreo' className='inputCorreo' placeholder='Correo Electrónico' onChange={handleChange} onBlur={handleBlur} />
                   <span className={error.inputCorreo ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
                   <button type="submit" className='buttonSubmit'>Ingresar</button>
-                  <div className="seccionLoginRegistro">
-                     <p>¿No tienes una cuenta?</p>
-                     <Link className='linkSeccion' to={RoutersLinks.Registrarse}>Regístrate</Link>
-                  </div>
+
                </form>
 
                {loading === true && <Loading />}
