@@ -14,28 +14,34 @@ const cookies = new Cookies();
 const initialForm = {
    accessAPI: "Registrarse",
    correo: "",
-   distribuidor: "",
-   region: "",
-   celular: ""
+   distribuidor: "/",
+   region: "/",
+   celular: "",
+   codigo: ""
 }
 
 const validationForm = (form) => {
    let errors = {};
 
-   if (!form["distribuidor"].trim()) {
+   if (form["distribuidor"] === "/") {
       errors["distribuidor"] = true;
    }
 
-   if (!form["region"].trim()) {
+   if (form["region"] === "/") {
       errors["region"] = true;
    }
 
    if (!form["correo"].trim()) {
-      errors["correo"] = true;
+      errors["correo"] = "Debes llenar este campo para continuar";
+   }else if(Object.values(form.correo).length > 70){
+      errors["correo"] = `Has superado el límite máximo de caracteres permitidos. Caracteres: ${Object.values(form.correo).length}/70`;
    }
 
+
    if (!form["celular"].trim()) {
-      errors["celular"] = true;
+      errors["celular"] = "Debes llenar este campo para continuar";
+   }else if(Object.values(form.celular).length > 15){
+      errors["celular"] = `Has superado el límite máximo de caracteres permitidos. Caracteres: ${Object.values(form.celular).length}/15`;
    }
 
    errors.estado = true;
@@ -93,18 +99,18 @@ const Registrarse = () => {
 
                      <div className="selectsInputs">
                         <div className="contentInputs">
-                           <p>Distribuidor que lo atiende</p>
+                           <p>Distribuidor que lo atiende <span>*</span></p>
                            <select name="distribuidor" className='selectDistribuidor' defaultValue='/' onChange={handleChange} onBlur={handleBlur}>
                               <option disabled value="/">Elige una opción</option>
                               {drogerias.map((item, index) => (
                                  <option key={index} value={item.distr}>{item.distr}</option>
                               ))}
-                           </select>
+                           </select> <br />
                            <span className={error.distribuidor && showErrors ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
                         </div>
 
                         <div className="contentInputs">
-                           <p>Zonas Equipo ACF</p>
+                           <p>Zonas Equipo ACF <span>*</span></p>
                            <select name="region" className='selectDistribuidor' defaultValue='/' onChange={handleChange} onBlur={handleBlur}>
                               <option disabled value="/">Elige una opción</option>
                               <option value={"OCC"}>OCC</option>
@@ -116,21 +122,27 @@ const Registrarse = () => {
                                     ))}
                                  </>
                               ))}
-                           </select>
+                           </select> <br />
                            <span className={error.region && showErrors ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
+                        </div>
+
+                        <div className="contentInputs">
+                           <p>Código IPV ACF <span>(opcional)</span></p>
+                           <input type="text" id='codigo' name='codigo' className='inputCorreo' placeholder='Código IPV ACF' onChange={handleChange} onBlur={handleBlur} /><br />
+                           <span className={error.correo && showErrors ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
                         </div>
                      </div>
 
                      <div className="contentInputs">
-                        <p>Correo Electrónico</p>
+                        <p>Correo Electrónico <span>*</span></p>
                         <input type="text" id='correo' name='correo' className='inputCorreo' placeholder='Correo Electrónico' onChange={handleChange} onBlur={handleBlur} /><br />
-                        <span className={error.correo && showErrors ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
+                        <span className={error.correo && showErrors ? "errorText" : "noShow"}>{error.correo}</span><br />
                      </div>
 
                      <div className="contentInputs">
-                        <p>Celular</p>
+                        <p>Celular <span>*</span></p>
                         <input type="number" id='celular' name='celular' className='inputCorreo' placeholder='Celular' onChange={handleChange} onBlur={handleBlur} /><br />
-                        <span className={error.celular && showErrors ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
+                        <span className={error.celular && showErrors ? "errorText" : "noShow"}>{error.celular}</span><br />
                      </div>
 
                   </div>

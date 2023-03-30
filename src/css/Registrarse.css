@@ -70,8 +70,8 @@
 }
 
 .formRegistrarse .selectDistribuidor {
-   width: 480px !important;
-   padding: 1em;
+   width: 480px;
+   padding: 0.3em 1em;
    margin: 0.5em 0 0.5em;
    font-family: "Light";
    font-size: 1em;
@@ -88,13 +88,18 @@
 }
 
 .formRegistrarse input.inputCorreo {
-   width: 480px !important;
-   padding: 1em;
+   width: 480px;
+   padding: 0.3em 1em;
    margin: 0.5em 0 0.5em;
    font-family: "Light";
    font-size: 1em;
    border: 2px solid transparent;
    border-radius: 2em;
+}
+
+.contentInputs p span {
+   font-size: 0.8em;
+   color: #009CA6;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -169,8 +174,24 @@ input[type=number] {
 
 @media only screen and (max-width: 1400px) {
 
+   .imgPortada {
+      width: 40%;
+   }
+
+   .seccionForm {
+      width: 60%;
+   }
+
+   .formRegistrarse .formCampos {
+      width: 95%;
+   }
+
    .seccionForm .nav-imgLogo {
       height: 4em;
+   }
+
+   .formRegistrarse form {
+      width: 90%;
    }
 
    .formRegistrarse .contentInputs {
@@ -181,7 +202,7 @@ input[type=number] {
    .formRegistrarse .selectDistribuidor {
       padding: 0.5em;
       margin: 0.5em 0 0.5em;
-      width: 200px !important;
+      width: 200px;
    }
 
    .formRegistrarse input.inputCorreo {
@@ -209,8 +230,17 @@ input[type=number] {
       display: flex;
    }
 
-   .formRegistrarse .selectsInputs .contentInputs:nth-child(1) {
+   .formRegistrarse .selectsInputs .contentInputs:nth-child(1),
+   .formRegistrarse .selectsInputs .contentInputs:nth-child(2) {
       margin-right: 2em;
+   }
+
+   .formRegistrarse .selectsInputs .contentInputs:nth-child(3) {
+      width: 18em;
+   }
+
+   .formRegistrarse .selectsInputs .contentInputs:nth-child(3) input.inputCorreo {
+      width: 15em;
    }
 
    .formRegistrarse p {
@@ -226,6 +256,20 @@ input[type=number] {
 }
 
 @media only screen and (max-width: 480px) {
+
+   .Registrarse {
+      overflow: visible;
+   }
+
+   .seccionForm {
+      height: 100%;
+   }
+
+   .formRegistrarse {
+      margin-top: 3em;
+      padding-bottom: 3em;
+   }
+
    .formRegistrarse .selectsInputs {
       display: flex;
       flex-direction: column;
@@ -240,7 +284,7 @@ input[type=number] {
    }
 
    .formRegistrarse input.inputCorreo {
-      width: 250px !important;
+      width: 90% !important;
    }
 
    .formRegistrarse .seccionLoginRegistro {
@@ -249,5 +293,22 @@ input[type=number] {
       display: flex;
       flex-direction: column;
       align-items: center;
+   }
+
+   .formRegistrarse .selectDistribuidor {
+      width: 323.75px;
+   }
+
+   .formRegistrarse .selectsInputs .contentInputs:nth-child(3) input.inputCorreo {
+      width: 300.75px !important;
+   }
+
+   .errorText {
+      font-size: 0.8em;
+      margin-bottom: 1em;
+   }
+
+   .seccionLoginRegistro a.linkSeccion {
+      margin: 0;
    }
 }

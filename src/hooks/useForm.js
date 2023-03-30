@@ -15,18 +15,20 @@ export const useForm = (initialForm, validationForm) => {
    const handleChange = (e) => {
 
       const target = e.target;
-      const value = target.value;
       const name = target.name;
+      const value = target.value;
 
       setForm({
          ...form,
          [name]: value
       });
+      delete form[''];
    };
 
    const handleBlur = (e) => {
       handleChange(e);
       setError(validationForm(form));
+      delete error[''];
    }
 
    const handleSubmit = (e) => {
@@ -38,14 +40,14 @@ export const useForm = (initialForm, validationForm) => {
       delete form[''];
       delete error[''];
       // error.estado, 
-      console.log(Object.keys(error).length === 1, error.estado, Object.keys(error).length === 1 && error.estado)
+      // console.log(Object.keys(error).length === 1, error.estado, Object.keys(error).length === 1 && error.estado)
 
       if (Object.keys(error).length === 1 && error.estado) {
 
          setLoading(true);
          axios.post(`${urlApi}/${form.accessAPI}`, form)
             .then(function (response) {
-               console.log(response)
+               // console.log(response)
                setData(response.data);
                setResponseApi(true);
             })
@@ -66,7 +68,7 @@ export const useForm = (initialForm, validationForm) => {
 
       axios.post(`${urlApi}/${datosCapacitacion.url}`, datosCapacitacion)
          .then(function (response) {
-            console.log(response)
+            // console.log(response)
             setData(response.data);
             setResponseApi(true);
          })

@@ -1,6 +1,6 @@
 .Login {
    width: 100%;
-   max-height: 100vh;
+   height: 100vh;
    display: flex;
    overflow: hidden;
 }

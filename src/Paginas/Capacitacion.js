@@ -31,7 +31,7 @@ const Capacitacion = () => {
    let dowloadFile = MenuCap[video]
 
    const handleCapacitacion = () => {
-      console.log(video);
+      // console.log(video);
       if (video < 4) {
          // setVideo(video + 1);
          setShowQuiz(false);
@@ -63,7 +63,7 @@ const Capacitacion = () => {
          producto = "LuminousWhite";
       }
 
-      console.log(producto, idVideo);
+      // console.log(producto, idVideo);
       return producto;
    }
 
