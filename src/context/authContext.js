@@ -10,7 +10,6 @@ const AuthContextProvider = ({ children }) => {
 
    const login = useCallback(() => {
       // window.localStorage.setItem(token, id_token); id_token
-      console.log(1111111111111111111);
       setIsAuthenticated(true);
    }, []);
 

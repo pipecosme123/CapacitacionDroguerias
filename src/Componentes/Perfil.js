@@ -8,7 +8,7 @@ const Perfil = () => {
    const [show, setShow] = useState(false);
 
    const cookies = new Cookies();
-   const usuario = `${cookies.get('correoUsuario')}`; 
+   const usuario = localStorage.getItem('correo'); 
    // const usuario = `Prueba Prueba`; 
 
    const cerrarSesion = () => {

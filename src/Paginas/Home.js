@@ -1,9 +1,10 @@
 import React from 'react';
 import { Imagenes } from '../Constantes/Imagenes';
 import SliderImg from '../Componentes/SliderImg';
-import '../css/Home.css';
 import { RoutersLinks } from '../Constantes/RoutersLinks';
 import { HiChevronDoubleRight } from 'react-icons/hi';
+import '../css/Home.css';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
    return (
@@ -14,10 +15,10 @@ const Home = () => {
             </div>
          </div>
          <div className="informacionPrincipal">
-            <a className="LinkRedireccinar" href={RoutersLinks.MenuCapacitacion}>
+            <Link className="LinkRedireccinar" to={`${RoutersLinks.Menu}`}>
                <h1>Ir a la Capacitación</h1><br />
                <HiChevronDoubleRight />
-            </a>
+            </Link>
             <div className="Content">
                <h1 className='titulo'>Aquí encontrarás</h1>
                <div className="informaciones">

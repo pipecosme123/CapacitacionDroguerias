@@ -20,21 +20,13 @@ const NavBar = () => {
          showCancelButton: true,
          focusConfirm: false,
          confirmButtonText:
-            `<a href="http://colgate.com/es-co" className={"navLink"} >Si</a>`,
+            `<a target="_blank" href="http://colgate.com/es-co" className={"navLink"} >Si</a>`,
          confirmButtonAriaLabel: 'Thumbs up, great!',
          cancelButtonText:
             '<i class="fa fa-thumbs-down"></i>Cancelar',
          cancelButtonAriaLabel: 'Cancelar'
       })
    }
-
-
-   useEffect(() => {
-      const cookies = new Cookies();
-      if (!cookies.get('idUsuario')) {
-         window.location.pathname = RoutersLinks.Login;
-      }
-   }, []);
 
    return (
       <nav className='NavBar'>
@@ -47,7 +39,7 @@ const NavBar = () => {
                   pathName !== RoutersLinks.Registrarse &&
                   <>
                      <NavLink to={`${RoutersLinks.Home}`} className={({ isActive }) => "navLink" + (isActive ? " activeLink" : "")} >Inicio</NavLink>
-                     <NavLink to={`${RoutersLinks.MenuCapacitacion}`} className={({ isActive }) => "navLink" + (isActive ? " activeLink" : "")} >Capacítate</NavLink>
+                     <NavLink to={`${RoutersLinks.Menu}`} className={({ isActive }) => "navLink" + (isActive ? " activeLink" : "")} >Capacítate</NavLink>
                      <button onClick={()=> salir()} className={"navLink"} >Descubre más</button>
                      <Perfil />
                   </>
@@ -60,7 +52,7 @@ const NavBar = () => {
                pathName !== RoutersLinks.Registrarse &&
                <>
                   <NavLink to={`${RoutersLinks.Home}`} className={({ isActive }) => "navLink" + (isActive ? " activeLink" : "")} >Inicio</NavLink>
-                  <NavLink to={`${RoutersLinks.MenuCapacitacion}`} className={({ isActive }) => "navLink" + (isActive ? " activeLink" : "")} >Capacítate</NavLink>
+                  <NavLink to={`${RoutersLinks.Menu}`} className={({ isActive }) => "navLink" + (isActive ? " activeLink" : "")} >Capacítate</NavLink>
                   <a href={`${RoutersLinks.Descubre}`} className={"navLink"} >Descubre más</a>
                </>
             }

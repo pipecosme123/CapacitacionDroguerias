@@ -1,9 +1,9 @@
 export const RoutersLinks = {
    Login: "/",
-   Registrarse: "/Registrarse",
-   Home: "/pv",
-   MenuCapacitacion: "/pv/Menu",
-   Capacitacion: "/pv/Capacitacion/:id",
+   Registrarse: "/registrarse",
+   Home: "capacitacion",
+   Menu: "menu",
+   Capacitacion: ":id",
    Descubre: "http://colgate.com/es-co"
 }
 

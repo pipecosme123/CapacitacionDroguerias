@@ -10,100 +10,91 @@ import { useParams } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
 import Cookies from 'universal-cookie';
 import { RoutersLinks } from '../Constantes/RoutersLinks';
+import { useApi } from '../hooks/useApi';
+import Loading from '../Componentes/Loading';
+import { toast, Toaster } from 'react-hot-toast';
 
 const cookies = new Cookies();
 
 const Capacitacion = () => {
 
-   const [masTexto, setMasTexto] = useState(false);
-   const [showQuiz, setShowQuiz] = useState(false);
+   const { loading, api_handleSubmit } = useApi();
+   const [capacitacion, setCapacitacion] = useState({});
 
-   const {
-      handleShowCapacitacion,
-      descargaMaterial
-   } = useForm();
+   const { id } = useParams();
+   const video = parseInt(id);
+   const cantProductos = JSON.parse(localStorage.getItem('videos')).length;
 
-   let { id } = useParams();
+   // const handleCapacitacion = () => {
+   //    if (video < 4) {
+   //       setMasTexto(false);
+   //       window.location.pathname = `/Capacitacion/${video + 1}`;
+   //    } else {
+   //       setMasTexto(false)
+   //       window.location.pathname = RoutersLinks.Menu;
+   //    }
+   // }
 
-   let video = parseInt(id);
+   // const postVistoVideo = () => {
 
-   let contentCap = Capacitaciones[video];
-   let dowloadFile = MenuCap[video]
+   //    let form = {
+   //       method: 'post',
+   //       url: "ViewCapacitacion",
+   //       producto: { id }
+   //    }
 
-   const handleCapacitacion = () => {
-      // console.log(video);
-      if (video < 4) {
-         // setVideo(video + 1);
-         setShowQuiz(false);
-         setMasTexto(false);
-         window.location.pathname = `/Capacitacion/${video + 1}`;
-      } else {
-         setShowQuiz(false);
-         setMasTexto(false)
-         window.location.pathname = RoutersLinks.MenuCapacitacion;
+   //    api_handleSubmit(form)
+   //       .then(() => {
+
+   //       })
+   //       .catch(() => {
+
+   //       });
+   // }
+
+   const endVideo = () => {
+      const form = {
+         method: 'post',
+         url: 'viewVideo',
+         params: { id: video }
       }
+
+      api_handleSubmit(form)
+         .then((res) => {
+            toast.success(res.data, {
+               duration: 10000,
+               position: 'top-center'
+            })
+         })
+         .catch((err) => {
+            toast.error(err.data, {
+               duration: 7000,
+               position: 'top-center'
+            })
+         });
    }
 
-   const getProducto = (idVideo) => {
-      let producto;
-
-      if (idVideo === 0) {
-         producto = "SensitiveProAlivio";
-      }
-      else if (idVideo === 1) {
-         producto = "Periogard";
-      }
-      else if (idVideo === 2) {
-         producto = "Orthogard";
-      }
-      else if (idVideo === 3) {
-         producto = "Total12";
-      }
-      else if (idVideo === 4) {
-         producto = "LuminousWhite";
+   const get_video = () => {
+      const form = {
+         method: 'get',
+         url: 'producto',
+         params: { id: video }
       }
 
-      // console.log(producto, idVideo);
-      return producto;
-   }
-
-   const viewQuiz = () => {
-
-      let textApiVideo = getProducto(parseInt(id));
-      let apiVideo = JSON.parse(window.localStorage.getItem('data'));
-
-      if (apiVideo[textApiVideo] === "NO") {
-         postVistoVideo();
-      }
-      changeLocalStorage();
-      setShowQuiz(true)
-   }
-
-   const postVistoVideo = () => {
-      let idUduario = cookies.get("idUsuario");
-      let idVideo = video + 1;
-
-      let datosCapacitacion = {
-         url: "ViewCapacitacion",
-         idUsuario: idUduario,
-         idProducto: idVideo
-      }
-      handleShowCapacitacion(datosCapacitacion);
-   }
-
-   const changeLocalStorage = () => {
-
-      let textApiVideo = getProducto(parseInt(id));
-      let apiVideo = JSON.parse(window.localStorage.getItem('data'));
-
-      apiVideo[textApiVideo] = "SI";
-
-      window.localStorage.setItem('data', JSON.stringify(apiVideo));
-
+      api_handleSubmit(form)
+         .then((res) => {
+            setCapacitacion(res.data);
+         })
+         .catch((err) => {
+            toast.error(err.data, {
+               duration: 7000,
+               position: 'top-center'
+            })
+         });
    }
 
    useEffect(() => {
-
+      get_video();
    }, []);
 
    return (
@@ -111,10 +102,10 @@ const Capacitacion = () => {
 
          <div className="video">
             <div className="Content">
-               <h1 className='tituloVideo'>{contentCap.titulo}</h1>
+               <h1 className='tituloVideo'>{capacitacion.nombre}</h1>
                <div className="video-responsive">
                   <ReactPlayer
-                     url={contentCap.video}
+                     url={capacitacion.video}
                      config={{
                         vimeo: {
                            controls: true,
@@ -124,7 +115,7 @@ const Capacitacion = () => {
                      }}
                      volumen={1}
                      controls
-                     onEnded={() => viewQuiz()}
+                     onEnded={() => endVideo()}
                   />
                </div>
             </div>
@@ -133,44 +124,37 @@ const Capacitacion = () => {
 
          <div className="informacion Content">
             <div>
+               <div className="conten-buttons">
+                  {video - 1 !== 0 &&
+                     <button className="navigation">ANTES</button>
+                  }
+               </div>
+               <div className="conten-buttons">
+                  <button className="navigation"></button>
+               </div>
+               <div className="conten-buttons">
+                  {video !== cantProductos &&
+                     <button className="navigation">DESPUES</button>
+                  }
+               </div>
+            </div>
+            <div>
                <h3 className='titulo'>Descripción</h3>
                <div className="descripcion">
                   <div className='texto'>
                      <p>
-                        {masTexto ? contentCap.descripcion : contentCap.descripcionCorta}
+                        {capacitacion.texto}
                         <br />
-                        <button onClick={() => setMasTexto(!masTexto)}>
-                           {masTexto ? "Ver menos" : "Ver más"}
-                           <br />
-                           {masTexto ? <RiArrowUpSFill /> : <RiArrowDownSFill />}
-
-                        </button>
                      </p>
                   </div>
-
-                  <div className="material">
-                     <h3>Material de estudio</h3>
-
-                     <div className="descargaMaterial" onClick={() => descargaMaterial(dowloadFile.descarga, dowloadFile.nombreDescarga)}>
-                        <img src={Imagenes.iconoPdf} alt="" />
-                        <div className="textoMaterial">
-                           <h5>Descargar <MdFileDownload className='iconSvg' /></h5>
-                           <p>Infografia {contentCap.titulo}</p>
-                        </div>
-                     </div>
-
-                  </div>
-
                </div>
             </div>
 
          </div>
 
-         {showQuiz &&
-            <div className="Content">
-               <Quiz idVideoC={id} nombreQuiz={contentCap.nombreQuiz} handleCapacitacion={handleCapacitacion} />
-            </div>
-         }
+         {loading === true && <Loading />}
+         <Toaster />
+
       </div>
    );
 };

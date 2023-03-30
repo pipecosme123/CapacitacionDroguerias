@@ -31,8 +31,8 @@ const Login = () => {
 
       api_handleSubmit(data)
          .then((res) => {
-            localStorage.setItem('token', res.token);
-            localStorage.setItem('correo', res.correo);
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('correo', res.data.correo);
             login();
          }).catch((err) => {
             toast.error(err.response.data, {
@@ -86,18 +86,3 @@ const Login = () => {
 };
 
 export default Login;
-
-{/* {loading === true && <Loading />}
-
-               {responseApi === false &&
-                  <div className='alert danger'  >
-                     Tenemos un problema, Vuelve a intentarlo más tarde
-                  </div>
-               }
-
-               {responseApi && data === 'undefined' &&
-                  <div className='alert danger'  >
-                     <b>El correo electrónico es incorrecto</b> <br />
-                     Vuelve a intentarlo
-                  </div>
-               } */}

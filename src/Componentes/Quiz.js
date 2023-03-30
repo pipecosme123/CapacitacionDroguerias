@@ -156,7 +156,7 @@ const Quiz = ({ nombreQuiz, handleCapacitacion, idVideoC }) => {
                   <div className="footer2">
                      <hr />
                      <div className="botonesFooter">
-                        <button className={`siguientePregunta`} onClick={() => window.location.pathname = RoutersLinks.MenuCapacitacion}>
+                        <button className={`siguientePregunta`} onClick={() => window.location.pathname = RoutersLinks.Menu}>
                            Volver al menú <AiOutlineMenu />
                         </button>
                         <button className={`siguientePregunta`} onClick={() => changeVideo()}>

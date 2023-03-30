@@ -6,12 +6,12 @@ import { RoutersLinks } from '../Constantes/RoutersLinks';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
 import '../css/MenuCapacitacion.css';
 import { useForm } from '../hooks/useForm';
+import { useApi } from '../hooks/useApi';
+import Loading from '../Componentes/Loading';
 
 const MenuCapacitacion = () => {
 
-   const {
-      descargaMaterial
-   } = useForm();
+   const { loading, api_handleSubmit } = useApi();
 
    const [productos, setProductos] = useState({
       SensitiveProAlivio: "",
@@ -21,20 +21,26 @@ const MenuCapacitacion = () => {
       LuminousWhite: ""
    });
 
+   const [menuCap, setMenuCap] = useState([]);
+
+
    let url = RoutersLinks.Capacitacion.split('/');
 
    const vistoVideo = () => {
+      const form = {
+         method: 'get',
+         url: 'productos',
+      }
 
-      let datos = JSON.parse(window.localStorage.getItem('data'));
-
-      setProductos({
-         SensitiveProAlivio: datos.SensitiveProAlivio,
-         Periogard: datos.Periogard,
-         Orthogard: datos.Orthogard,
-         Total12: datos.Total12,
-         LuminousWhite: datos.LuminousWhite
-      })
-
+      api_handleSubmit(form)
+         .then((res) => {
+            localStorage.setItem('videos', JSON.stringify(res.data));
+            setMenuCap(res.data);
+            console.log(res.data);
+         })
+         .catch((err) => {
+            console.log(err);
+         });
    }
 
    useEffect(() => {
@@ -47,11 +53,11 @@ const MenuCapacitacion = () => {
             <h1 className='titulo'>Capacitaciones</h1>
 
             <div className="menuVideos">
-               {MenuCap.map((item, index) => (
+               {menuCap.map((item, index) => (
 
-                  <div key={index} className={`capVideos ${productos[item.tituloAPI] === "SI" ? "visto" : "noVisto"}`}>
+                  <div key={index} className={`capVideos ${item.visto === true ? "visto" : "noVisto"}`}>
 
-                     {productos[item.tituloAPI] === "SI" ?
+                     {item.visto === true ?
                         <div className="status Check">
                            <AiOutlineCheck />
                            <p>Revisado</p>
@@ -65,27 +71,22 @@ const MenuCapacitacion = () => {
 
                      <div className="nameContent">
                         <div className="imgContent">
-                           <img src={item.imagen} alt="" />
+                           <img src={item.imagenes} alt="" />
                         </div>
-                        <h3>{item.titulo}</h3>
+                        <h3>{item.nombre}</h3>
                      </div>
 
-                     {productos[item.tituloAPI] === "SI" &&
-                        <div onClick={() => descargaMaterial(item.descarga, item.nombreDescarga)} className='descargaMaterial'> <MdFileDownload /> </div>
-                     }
-                     <Link to={`/${url[1]}/${index}`} className='verCapacitacion'>Ver ahora</Link>
+                     <Link to={`${item.id}`} className='verCapacitacion'>Ver ahora</Link>
 
                      <div className="buttonsMobile">
-                        {productos[item.tituloAPI] === "SI" &&
-                           <div onClick={() => descargaMaterial(item.descarga, item.nombreDescarga)} className='descargaMaterial mobile'> <MdFileDownload /> </div>
-                        }
-                        <Link to={`/${url[1]}/${index}`} className='verCapacitacion mobile'>Ver ahora</Link>
+                        <Link to={`${item.id}`} className='verCapacitacion mobile'>Ver ahora</Link>
                      </div>
                   </div>
 
                ))}
             </div>
          </div>
+         {loading === true && <Loading />}
       </div>
    );
 };

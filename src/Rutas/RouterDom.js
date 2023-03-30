@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { RoutersLinks } from '../Constantes/RoutersLinks';
 import AuthContextProvider from '../context/authContext';
 import Capacitacion from '../Paginas/Capacitacion';
@@ -24,13 +24,15 @@ const RouterDom = () => {
 
                <Route path={RoutersLinks.Home} element={<PrivateRoute />}>
                   <Route index element={<Home />} />
-                  <Route path={RoutersLinks.MenuCapacitacion} element={<MenuCapacitacion />} />
-                  <Route path={RoutersLinks.Capacitacion} element={<Capacitacion />} />
+                  <Route path={RoutersLinks.Menu} element={<Outlet />}>
+                     <Route index element={<MenuCapacitacion />} />
+                     <Route path={RoutersLinks.Capacitacion} element={<Capacitacion />} />
+                  </Route>
                </Route>
             </Routes>
          </BrowserRouter>
       </AuthContextProvider>
-      
+
    );
 };
 
