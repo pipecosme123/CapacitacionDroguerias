@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { MdFileDownload } from 'react-icons/md';
-import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri';
-import { Imagenes } from '../Constantes/Imagenes';
-import { Capacitaciones, MenuCap } from '../Constantes/Capacitaciones';
+import { RxDoubleArrowRight, RxDoubleArrowLeft, RxHamburgerMenu } from 'react-icons/rx';
 import ReactPlayer from 'react-player';
-import Quiz from '../Componentes/Quiz';
-import '../css/Capacitacion.css';
 import { useParams } from 'react-router-dom';
-import { useForm } from '../hooks/useForm';
-import Cookies from 'universal-cookie';
 import { RoutersLinks } from '../Constantes/RoutersLinks';
 import { useApi } from '../hooks/useApi';
 import Loading from '../Componentes/Loading';
 import { toast, Toaster } from 'react-hot-toast';
 
-const cookies = new Cookies();
+import '../css/Capacitacion.css';
 
 const Capacitacion = () => {
 
@@ -25,34 +18,8 @@ const Capacitacion = () => {
    const video = parseInt(id);
    const cantProductos = JSON.parse(localStorage.getItem('videos')).length;
 
-   // const handleCapacitacion = () => {
-   //    if (video < 4) {
-   //       setMasTexto(false);
-   //       window.location.pathname = `/Capacitacion/${video + 1}`;
-   //    } else {
-   //       setMasTexto(false)
-   //       window.location.pathname = RoutersLinks.Menu;
-   //    }
-   // }
+   const postVistoVideo = () => {
 
-   // const postVistoVideo = () => {
-
-   //    let form = {
-   //       method: 'post',
-   //       url: "ViewCapacitacion",
-   //       producto: { id }
-   //    }
-
-   //    api_handleSubmit(form)
-   //       .then(() => {
-
-   //       })
-   //       .catch(() => {
-
-   //       });
-   // }
-
-   const endVideo = () => {
       const form = {
          method: 'post',
          url: 'viewVideo',
@@ -72,6 +39,18 @@ const Capacitacion = () => {
                position: 'top-center'
             })
          });
+   }
+
+   const endVideo = () => {
+      const apiVideo = JSON.parse(localStorage.getItem('videos'));
+
+      const id = apiVideo.findIndex(e => e.id === video);
+
+      if (apiVideo[id].visto !== true) {
+         postVistoVideo();
+         apiVideo[id].visto = true;
+         localStorage.setItem('videos', JSON.stringify(apiVideo));
+      }
    }
 
    const get_video = () => {
@@ -122,23 +101,26 @@ const Capacitacion = () => {
 
          </div>
 
+         <div className='container-btn Content'>
+
+            <a className='link-btn' href={`/${RoutersLinks.Home}/${RoutersLinks.Menu}/${video - 1 === 0 ? "" : video - 1}`}>
+               <button className={`navigation ${video - 1 === 0 ? "disable" : "btn"}`}><RxDoubleArrowLeft /> ANTES </button>
+            </a>
+
+            <a className='link-btn' href={`/${RoutersLinks.Home}/${RoutersLinks.Menu}`}>
+               <button className="navigation btn"><RxHamburgerMenu /> TODAS LAS LECCIONES</button>
+            </a>
+
+            <a className='link-btn' href={`${video === cantProductos ? "" : video + 1}`}>
+               <button className={`navigation ${video === cantProductos ? "disable" : "btn"}`}>DESPUES <RxDoubleArrowRight /></button>
+            </a>
+            {/* {video !== cantProductos &&
+            } */}
+
+         </div>
+
          <div className="informacion Content">
-            <div>
-               <div className="conten-buttons">
-                  {video - 1 !== 0 &&
-                     <button className="navigation">ANTES</button>
-                  }
-               </div>
-               <div className="conten-buttons">
-                  <button className="navigation"></button>
-               </div>
-               <div className="conten-buttons">
-                  {video !== cantProductos &&
-                     <button className="navigation">DESPUES</button>
-                  }
-               </div>
-            </div>
-            <div>
+            <div className=''>
                <h3 className='titulo'>Descripción</h3>
                <div className="descripcion">
                   <div className='texto'>

@@ -15,6 +15,8 @@ const AuthContextProvider = ({ children }) => {
 
    const logout = useCallback(() => {
       window.localStorage.removeItem(token, true);
+      window.localStorage.removeItem('videos', true);
+      window.localStorage.removeItem('correo', true);
       setIsAuthenticated(false);
    }, []);
 

@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
-import Cookies from 'universal-cookie';
-import { RoutersLinks } from '../Constantes/RoutersLinks';
+import { useAuthContext } from '../context/authContext';
+
 import '../css/Perfil.css';
 
 const Perfil = () => {
 
    const [show, setShow] = useState(false);
+   const { logout } = useAuthContext();
 
-   const cookies = new Cookies();
    const usuario = localStorage.getItem('correo'); 
-   // const usuario = `Prueba Prueba`; 
 
    const cerrarSesion = () => {
-
-      cookies.remove("correoUsuario");
-      cookies.remove("idUsuario");
-
-      localStorage.removeItem('data');
-
-      window.location.pathname = RoutersLinks.Login;
+      logout()
    }
 
    return (

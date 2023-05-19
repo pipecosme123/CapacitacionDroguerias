@@ -30,9 +30,9 @@ const Login = () => {
    const onSubmit = (data) => {
 
       api_handleSubmit(data)
-         .then((res) => {
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('correo', res.data.correo);
+         .then(({ data }) => {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('correo', data.correo);
             login();
          }).catch((err) => {
             toast.error(err.response.data, {
@@ -59,7 +59,7 @@ const Login = () => {
 
                <form onSubmit={handleSubmit(onSubmit)}>
 
-                  <p htmlFor="inputCorreo">Si usted está registrado, ingrese suaaa correo</p>
+                  <p htmlFor="inputCorreo">Si usted está registrado, ingrese su correo</p>
                   <input
                      {...register("auth.correo", {
                         required: { value: true, message: "Este campo es obligatorio." },

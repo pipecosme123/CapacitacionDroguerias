@@ -1,90 +1,150 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { drogerias, Regiones } from '../Constantes/ConstRegistros';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+// import { distribuidores, Regiones } from '../Constantes/ConstRegistros';
 import { Imagenes } from '../Constantes/Imagenes';
 import { RoutersLinks } from '../Constantes/RoutersLinks';
-import { useForm } from '../hooks/useForm';
-import '../css/Registrarse.css';
 import Loading from '../Componentes/Loading';
-import Swal from 'sweetalert2';
-import Cookies from 'universal-cookie';
-
-const cookies = new Cookies();
+import '../css/Registrarse.css';
+import { useForm } from 'react-hook-form';
+import { useApi } from '../hooks/useApi';
+import { toast, Toaster } from 'react-hot-toast';
 
 const initialForm = {
-   accessAPI: "Registrarse",
    correo: "",
    distribuidor: "/",
-   region: "/",
    celular: "",
    codigo: ""
 }
 
-const validationForm = (form) => {
-   let errors = {};
-
-   if (form["distribuidor"] === "/") {
-      errors["distribuidor"] = true;
-   }
-
-   if (form["region"] === "/") {
-      errors["region"] = true;
-   }
-
-   if (!form["correo"].trim()) {
-      errors["correo"] = "Debes llenar este campo para continuar";
-   }else if(Object.values(form.correo).length > 70){
-      errors["correo"] = `Has superado el límite máximo de caracteres permitidos. Caracteres: ${Object.values(form.correo).length}/70`;
-   }
-
-
-   if (!form["celular"].trim()) {
-      errors["celular"] = "Debes llenar este campo para continuar";
-   }else if(Object.values(form.celular).length > 15){
-      errors["celular"] = `Has superado el límite máximo de caracteres permitidos. Caracteres: ${Object.values(form.celular).length}/15`;
-   }
-
-   errors.estado = true;
-   return errors;
-}
-
 const Registrarse = () => {
 
-   const {
-      error,
-      showErrors,
-      loading,
-      responseApi,
-      data,
-      handleChange,
-      handleBlur,
-      handleSubmit
-   } = useForm(initialForm, validationForm);
+   const navigate = useNavigate();
 
-   const aletRegister = () => {
-      Swal.fire({
-         title: 'Registrado Correctamente',
-         icon: 'success',
-         text: 'Ahora usted puede iniciar sesión',
-         showCloseButton: true,
-         showCancelButton: false,
-         focusConfirm: false,
-         confirmButtonText:
-            '<a href="/">Iniciar Sesión</a>',
-         confirmButtonAriaLabel: 'Thumbs up, great!',
-      })
+   const { register, handleSubmit, formState: { errors }, watch, reset } = useForm({
+      defaultValues: initialForm
+   });
+
+   const [distribuidores, setDistribuidores] = useState([]);
+   const [regiones, setRegiones] = useState([]);
+
+   const [data, setData] = useState({
+      zonas: [],
+      pv: []
+   });
+
+   const { loading, api_handleSubmit } = useApi();
+
+   const onSubmit = (data) => {
+
+      const config = {
+         method: 'post',
+         url: "signup",
+      }
+
+      const information = {
+         ...config,
+         data
+      }
+
+      api_handleSubmit(information)
+         .then((res) => {
+            toast.success(res.data, {
+               duration: 7000,
+               position: 'top-center'
+            })
+            reset();
+            toast.loading("Redireccionando...", {
+               duration: 5000,
+               position: 'top-center'
+            })
+            setTimeout(() => {
+               navigate(RoutersLinks.Login);
+            }, 3000)
+
+         }).catch((err) => {
+            toast.error(err.response.data, {
+               duration: 7000,
+               position: 'top-center'
+            })
+         })
+   };
+
+   const getData = (table, id) => {
+
+      const config = {
+         method: 'get',
+         url: table,
+         params: {
+            id
+         }
+      }
+
+      api_handleSubmit(config)
+         .then((res) => {
+
+            const response = res.data;
+
+            setData({
+               ...data,
+               [table]: response
+            })
+         })
+         .catch((err) => {
+            toast.error(err.response.data, {
+               duration: 7000,
+               position: 'top-center'
+            })
+         })
+   }
+
+   const getData_distribuidores = () => {
+
+      const config = {
+         method: 'get',
+         url: 'distribuidores'
+      }
+
+      api_handleSubmit(config)
+         .then((res) => {
+            setDistribuidores(res.data)
+
+         })
+         .catch((err) => {
+            toast.error(err.response.data, {
+               duration: 7000,
+               position: 'top-center'
+            })
+         })
+   }
+
+   const getData_regiones = () => {
+
+      const config = {
+         method: 'get',
+         url: 'regiones'
+      }
+
+      api_handleSubmit(config)
+         .then((res) => {
+            setRegiones(res.data)
+
+         })
+         .catch((err) => {
+            toast.error(err.response.data, {
+               duration: 7000,
+               position: 'top-center'
+            })
+         })
+   }
+
+   const validateOption = (value) => {
+      return value !== '/';
    }
 
    useEffect(() => {
-      if (responseApi && data !== undefined && data !== "existe") {
-         aletRegister();
-      }
-
-      if (cookies.get('idUsuario')) {
-         window.location.pathname = RoutersLinks.Home;
-      }
-
-   }, [responseApi, data]);
+      getData_distribuidores();
+      getData_regiones();
+   }, []);
 
    return (
       <div className='Registrarse'>
@@ -94,55 +154,133 @@ const Registrarse = () => {
             </div>
             <div className="formRegistrarse">
                <h1>Registrarse</h1>
-               <form onSubmit={handleSubmit}>
+               <form onSubmit={handleSubmit(onSubmit)}>
                   <div className='formCampos'>
 
                      <div className="selectsInputs">
                         <div className="contentInputs">
                            <p>Distribuidor que lo atiende <span>*</span></p>
-                           <select name="distribuidor" className='selectDistribuidor' defaultValue='/' onChange={handleChange} onBlur={handleBlur}>
-                              <option disabled value="/">Elige una opción</option>
-                              {drogerias.map((item, index) => (
-                                 <option key={index} value={item.distr}>{item.distr}</option>
+                           <select
+                              {...register("distribuidor", {
+                                 required: { value: true, message: "Este campo es obligatorio." },
+                                 validate: validateOption
+                              })}
+                              className='selectDistribuidor'
+                              value={watch('data.distribuidor')}
+                           >
+                              <option disabled value='/'>Elige una opción</option>
+                              {distribuidores.map((item, index) => (
+                                 <option key={index + 1} value={item.id}>{item.distribuidores}</option>
                               ))}
-                           </select> <br />
-                           <span className={error.distribuidor && showErrors ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
+                           </select>
+                           <br />
+                           {errors.distribuidor && <span className='message_error'>Debes seleccionar una opción</span>}
                         </div>
 
                         <div className="contentInputs">
-                           <p>Zonas Equipo ACF <span>*</span></p>
-                           <select name="region" className='selectDistribuidor' defaultValue='/' onChange={handleChange} onBlur={handleBlur}>
-                              <option disabled value="/">Elige una opción</option>
-                              <option value={"OCC"}>OCC</option>
-                              {Regiones.map((item, index) => (
-                                 <>
-                                    <option key={index} disabled value="/">{item.cabecera}</option>
-                                    {item.zonas.map((zona, id) => (
-                                       <option key={id} value={zona.region}>{zona.region}</option>
-                                    ))}
-                                 </>
-                              ))}
-                           </select> <br />
-                           <span className={error.region && showErrors ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
+                           <p>
+                              <input
+                                 {...register("occ")}
+                                 type="checkbox"
+                              // value="occ"
+                              /> OCC</p>
+                           {/* {errors.region && <span className='message_error'>{errors.region.message}</span>} */}
+                        </div>
+
+                        <div className="zonas_regiones">
+                           <div className="contentInputs">
+                              <p>Región <span>*</span></p>
+                              <select
+                                 className='selectDistribuidor'
+                                 defaultValue='/'
+                                 onChange={({ target: { value } }) => getData('zonas', value)}
+                              >
+                                 <option disabled value="/">Elige una opción</option>
+                                 {regiones.map((item, index) => (
+                                    <option key={index + 1} value={item.id}>{item.regiones}</option>
+                                 ))}
+                              </select> <br />
+                           </div>
+
+                           <div className="contentInputs">
+                              <p>Zonas Equipo ACF <span>*</span></p>
+                              <select
+                                 className='selectDistribuidor'
+                                 defaultValue='/'
+                                 disabled={data.zonas.length === 0 ? true : false}
+                                 onChange={({ target: { value } }) => getData('pv', value)}
+                              >
+                                 <option disabled value="/">Elige una opción</option>
+                                 {data.zonas.map((item, index) => (
+                                    <option key={index} value={item.id}>{item.zonas}</option>
+                                 ))}
+                              </select> <br />
+                           </div>
+
+                           <div className="contentInputs">
+                              <p>Puntos de venta<span>*</span></p>
+                              <select
+                                 {...register("pv", {
+                                    required: { value: true, message: "Este campo es obligatorio." },
+                                    validate: validateOption
+                                 })}
+                                 className='selectDistribuidor'
+                                 defaultValue='/'
+                                 disabled={data.pv.length === 0 ? true : false}
+                              >
+                                 <option disabled value="/">Elige una opción</option>
+                                 {data.pv.map((item, index) => (
+                                    <option key={index} value={item.id}>{item.pv}</option>
+                                 ))}
+                              </select> <br />
+                              {errors.pv && <span className='message_error'>Debes seleccionar una opción en zonas</span>}
+                           </div>
                         </div>
 
                         <div className="contentInputs">
                            <p>Código IPV ACF <span>(opcional)</span></p>
-                           <input type="text" id='codigo' name='codigo' className='inputCorreo' placeholder='Código IPV ACF' onChange={handleChange} onBlur={handleBlur} /><br />
-                           <span className={error.correo && showErrors ? "errorText" : "noShow"}>Debes llenar este campo para continuar</span><br />
+                           <input
+                              {...register("codigo", {
+                                 maxLength: {
+                                    value: 7,
+                                    message: "El Código IPV ACF no puede superar los 7 dígitos"
+                                 },
+                                 minLength: {
+                                    value: 6,
+                                    message: "El Código IPV ACF debe tener como mínimo 6 dígitos"
+                                 }
+                              })}
+                              type="number" className='inputCorreo' placeholder='Código IPV ACF' /><br />
+                           {errors.codigo && <span className='message_error'>{errors.codigo.message}</span>}
                         </div>
                      </div>
 
                      <div className="contentInputs">
                         <p>Correo Electrónico <span>*</span></p>
-                        <input type="text" id='correo' name='correo' className='inputCorreo' placeholder='Correo Electrónico' onChange={handleChange} onBlur={handleBlur} /><br />
-                        <span className={error.correo && showErrors ? "errorText" : "noShow"}>{error.correo}</span><br />
+                        <input
+                           {...register("correo", {
+                              required: { value: true, message: "Este campo es obligatorio." },
+                              pattern: { value: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/, message: "Debe ser una dirección de correo electrónico válida." },
+                              maxLength: { value: 70, message: "El correo electrónico no debe superar los 70 caracteres" }
+                           })}
+                           type="text" className='inputCorreo' placeholder='Correo Electrónico' /><br />
+                        {errors.correo && <span className='message_error'>{errors.correo.message}</span>}
                      </div>
 
                      <div className="contentInputs">
                         <p>Celular <span>*</span></p>
-                        <input type="number" id='celular' name='celular' className='inputCorreo' placeholder='Celular' onChange={handleChange} onBlur={handleBlur} /><br />
-                        <span className={error.celular && showErrors ? "errorText" : "noShow"}>{error.celular}</span><br />
+                        <input
+                           {...register("celular", {
+                              required: { value: true, message: "Este campo es obligatorio." },
+                              pattern: {
+                                 value: /^[3][0-9]{2}-?[0-9]{7}$/,
+                                 message: 'El número de celular debe ser un número registrado en Colombia'
+                              },
+                              maxLength: { value: 11, message: "El número de celular no debe superar los 11 dígitos" }
+
+                           })}
+                           type="number" className='inputCorreo' placeholder='Celular' /><br />
+                        {errors.celular && <span className='message_error'>{errors.celular.message}</span>}
                      </div>
 
                   </div>
@@ -155,18 +293,7 @@ const Registrarse = () => {
                </form>
 
                {loading === true && <Loading />}
-
-               {responseApi === false &&
-                  <div className='alert danger'>
-                     Tenemos un problema, Vuelve a intentarlo más tarde
-                  </div>
-               }
-
-               {responseApi && data === "existe" &&
-                  <div className='alert warning'>
-                     <b>Este usuario ya se encuentra registrado</b>, Intenta iniciando sesión
-                  </div>
-               }
+               <Toaster />
 
             </div>
          </div>

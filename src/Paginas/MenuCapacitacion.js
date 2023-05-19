@@ -1,49 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { MdFileDownload } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { MenuCap } from '../Constantes/Capacitaciones';
-import { RoutersLinks } from '../Constantes/RoutersLinks';
 import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
-import '../css/MenuCapacitacion.css';
-import { useForm } from '../hooks/useForm';
 import { useApi } from '../hooks/useApi';
 import Loading from '../Componentes/Loading';
+
+import '../css/MenuCapacitacion.css';
 
 const MenuCapacitacion = () => {
 
    const { loading, api_handleSubmit } = useApi();
-
-   const [productos, setProductos] = useState({
-      SensitiveProAlivio: "",
-      Periogard: "",
-      Orthogard: "",
-      Total12: "",
-      LuminousWhite: ""
-   });
-
    const [menuCap, setMenuCap] = useState([]);
 
-
-   let url = RoutersLinks.Capacitacion.split('/');
-
-   const vistoVideo = () => {
-      const form = {
-         method: 'get',
-         url: 'productos',
-      }
-
-      api_handleSubmit(form)
-         .then((res) => {
-            localStorage.setItem('videos', JSON.stringify(res.data));
-            setMenuCap(res.data);
-            console.log(res.data);
-         })
-         .catch((err) => {
-            console.log(err);
-         });
-   }
-
    useEffect(() => {
+      const vistoVideo = () => {
+         const form = {
+            method: 'get',
+            url: 'productos',
+         }
+   
+         api_handleSubmit(form)
+            .then((res) => {
+               localStorage.setItem('videos', JSON.stringify(res.data));
+               setMenuCap(res.data);
+               console.log(res.data);
+            })
+            .catch((err) => {
+               console.log(err);
+            });
+      }
+      
       vistoVideo();
    }, []);
 
